@@ -11,17 +11,14 @@ export function login(userInput) {
     return sendRequest(`${BASE_URL}/api/users/sign-in`, 'POST', userInput)
 }
 
-export function createListing(userInput) {
-    return sendRequest(`${BASE_URL}/api/listing/create`, 'POST', userInput)
+export function createHoliday(userInput) {
+    return sendRequest(`${BASE_URL}/api/holiday/create`, 'POST', userInput)
 }
 
-export function deleteListing(id) {
-    return sendRequest(`${BASE_URL}/api/listing/delete/${id}`,'DELETE')
+export function deleteHoliday(id) {
+    return sendRequest(`${BASE_URL}/api/holiday/delete/${id}`,'DELETE')
 }
 
-export function rentListing(id, userInput) {
-    return sendRequest(`${BASE_URL}/api/listing/rent/${id}`,'PUT', userInput)
-}
 
 export async function imageUpload(formData){
     const response = await axios.post(
@@ -29,20 +26,4 @@ export async function imageUpload(formData){
         formData
       )
       return response;
-}
-
-export async function getListingById(id){
-    return sendRequest(`${BASE_URL}/api/listing/posted/${id}`)
-}
-
-export async function updateListing(id,userInput) {
-    return sendRequest(`${BASE_URL}/api/listing/update/${id}`,'PUT',userInput)
-}
-
-export async function getUserListing(id){
-    return sendRequest(`${BASE_URL}/api/listing/${id}`)
-}
-
-export async function getAvailableListing() {
-    return sendRequest(`${BASE_URL}/api/listing/available`)
 }
