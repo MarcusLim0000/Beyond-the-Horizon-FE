@@ -1,10 +1,14 @@
 import { Route, Routes, Link } from "react-router-dom";
+import { useState } from "react";
 import "./App.css";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import Home from "./components/Home/Home";
+import { getUser } from "./utilities/user-services";
 
 function App() {
+  const [user, setUser] = useState(getUser())
+
   return (
     <div>
       <nav>
