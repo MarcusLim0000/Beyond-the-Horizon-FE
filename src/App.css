@@ -1,9 +1,13 @@
 /* General styles */
 body {
+  background-image: url('./assets/background.jpg');
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: center center; /* Centers the image */
+  height: 100%;
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
 }
+
 
 /* Container for the logo */
 .logo {
