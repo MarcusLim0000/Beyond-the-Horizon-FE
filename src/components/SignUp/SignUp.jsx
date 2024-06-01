@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./SignUp.css";
-//import { signUp } from "utilities/users-api";
+import { signUp } from '../../utilities/users-api';
 
 function SignUp() {
   const [state, setState] = useState({
@@ -9,7 +9,6 @@ function SignUp() {
     password: "",
     confirmPassword: "",
   });
-
 
   function handleChange(evt) {
     setState({ ...state, [evt.target.name]: evt.target.value });
@@ -31,6 +30,7 @@ function SignUp() {
       alert("An error occurred. Please try again!");
     }
   }
+
   return (
     <>
       <div className="form-container">
@@ -61,13 +61,12 @@ function SignUp() {
           />
           <label>Confirm password</label>
           <input
-            name="Confirm password"
+            name="confirmPassword"
             placeholder="Retype Password"
             type="password"
-            value={state.password}
+            value={state.confirmPassword}
             onChange={handleChange}
           />
-
           <button type="submit">Sign Up!</button>
         </form>
       </div>
