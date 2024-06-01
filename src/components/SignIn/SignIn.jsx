@@ -1,17 +1,19 @@
 import "./SignIn.css";
-import React, { useState } from "react";
-// import * as usersService from "utilities-users-service"
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import * as usersService from "../../utilities/user-services";
 
-function SignIn({ setUser }) {
+function SignIn({ setUser, user }) {
   const [state, setState] = useState({
     email: "",
     password: "",
   });
 
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   function handleChange(evt) {
-    setState({ ...state, [evt.target.name]: evt.target.value, error: "" });
+    setState({ ...state, [evt.target.name]: evt.target.value });
   }
 
   async function handleSubmit(e) {
@@ -24,6 +26,12 @@ function SignIn({ setUser }) {
       setError("Log in failed - try again");
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      navigate("/profile");
+    }
+  }, [user, navigate]);
 
   return (
     <>
@@ -47,6 +55,7 @@ function SignIn({ setUser }) {
           />
           <button type="submit">LOG IN</button>
         </form>
+        {error && <p className="error">{error}</p>}
       </div>
     </>
   );
