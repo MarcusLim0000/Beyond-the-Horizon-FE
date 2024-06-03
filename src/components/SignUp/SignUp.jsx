@@ -22,8 +22,11 @@ function SignUp() {
       return;
     }
 
+    // Create a new object excluding the confirmPassword field
+    const { confirmPassword, ...userData } = state;
+
     try {
-      await signUp(state);
+      await signUp(userData); // Send userData without confirmPassword
       alert("Sign up is successful! Please sign in now!");
     } catch (error) {
       console.log(error);

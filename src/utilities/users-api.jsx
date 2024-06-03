@@ -1,7 +1,7 @@
 import sendRequest from "./send-request";
 import axios from "axios";
 
-//const BASE_URL = 'https//localhost:3000'
+const BASE_URL = 'http://localhost:3000'
 
 export function signUp(userInput) {
     return sendRequest(`${BASE_URL}/api/users`, 'POST', userInput)
