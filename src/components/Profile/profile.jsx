@@ -1,10 +1,21 @@
-function profile() {
-  
-    return (
-      <div>
-        <p>This is the profile page!</p>
-      </div>
-    );
+import { Link, useNavigate } from "react-router-dom";
+import { logOut } from "../../utilities/user-services";
+
+export default function Profile({ user, setUser }) {
+  const navigate = useNavigate();
+
+  function handleSignOut() {
+    logOut();
+    setUser(null);
+    navigate("/"); // Navigate to home after sign out
   }
-  
-  export default profile;
+
+  return (
+    <div>
+      <button onClick={handleSignOut}>
+        Sign Out
+      </button>
+      <p>This is the profile page!</p>
+    </div>
+  );
+}

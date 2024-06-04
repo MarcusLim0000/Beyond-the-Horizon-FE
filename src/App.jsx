@@ -13,22 +13,34 @@ function App() {
   return (
     <div>
       <nav>
-        <Link to="/">
-          <div className="logo">img goes here</div>
-        </Link>
-        <Link to="/signIn">
-          <button className="signIN_button">Sign In</button>
-        </Link>
-        <Link to="/signUp">
-          <button className="signUp_button">Sign Up</button>
-        </Link>
+        {!user && (
+          <>
+            <Link to="/">
+              <div className="logo">img goes here</div>
+            </Link>
+            <Link to="/signIn">
+              <button className="signIN_button">Sign In</button>
+            </Link>
+            <Link to="/signUp">
+              <button className="signUp_button">Sign Up</button>
+            </Link>
+          </>
+        )}
       </nav>
       <main>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/signIn" element={<SignIn setUser={setUser} user={user} />} />
+          <Route
+            exact
+            path="/signIn"
+            element={<SignIn setUser={setUser} user={user} />}
+          />
           <Route exact path="/signUp" element={<SignUp />} />
-          <Route exact path="/profile" element={<Profile user={user} />} />
+          <Route
+            exact
+            path="/profile"
+            element={<Profile user={user} setUser={setUser} />}
+          />
         </Routes>
       </main>
     </div>
