@@ -5,19 +5,27 @@ import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/profile"; // Import Profile component
-import { getUser } from "./utilities/user-services";
+import CreateHoliday from "./components/createHoliday/createHoliday";
+import { getUser, logOut } from "./utilities/user-services"; // Import logOut function
 
 function App() {
   const [user, setUser] = useState(getUser());
+  const navigate = useNavigate(); // Use navigate for routing
+
+  function handleSignOut() {
+    logOut();
+    setUser(null);
+    navigate("/"); // Navigate to home after sign out
+  }
 
   return (
     <div>
       <nav>
-        {!user && (
+        <Link to="/">
+          <div className="logo">img goes here</div>
+        </Link>
+        {!user ? (
           <>
-            <Link to="/">
-              <div className="logo">img goes here</div>
-            </Link>
             <Link to="/signIn">
               <button className="signIN_button">Sign In</button>
             </Link>
@@ -25,6 +33,8 @@ function App() {
               <button className="signUp_button">Sign Up</button>
             </Link>
           </>
+        ) : (
+          <button onClick={handleSignOut} className="signOut_button">Sign Out</button>
         )}
       </nav>
       <main>
@@ -41,6 +51,7 @@ function App() {
             path="/profile"
             element={<Profile user={user} setUser={setUser} />}
           />
+          <Route exact path="/create-holiday" element={<CreateHoliday />} /> {/* Define the route */}
         </Routes>
       </main>
     </div>

@@ -1,21 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
-import { logOut } from "../../utilities/user-services";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile({ user, setUser }) {
   const navigate = useNavigate();
 
-  function handleSignOut() {
-    logOut();
-    setUser(null);
-    navigate("/"); // Navigate to home after sign out
+  function handleCreateHoliday() {
+    navigate("/create-holiday"); // Navigate to the create-holiday route
   }
 
   return (
     <div>
-      <button onClick={handleSignOut}>
-        Sign Out
-      </button>
       <p>This is the profile page!</p>
+      <div>
+        <button onClick={handleCreateHoliday}>Create a holiday here!</button>
+      </div>
     </div>
   );
 }
