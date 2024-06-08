@@ -11,18 +11,18 @@ export function login(userInput) {
     return sendRequest(`${BASE_URL}/api/users/sign-in`, 'POST', userInput)
 }
 
-export function createHoliday(userInput) {
-    return sendRequest(`${BASE_URL}/api/holiday/create`, 'POST', userInput)
+export function createFlight(userInput) {
+    return sendRequest(`${BASE_URL}/api/flight/create`, 'POST', userInput)
 }
 
-export function deleteHoliday(id) {
-    return sendRequest(`${BASE_URL}/api/holiday/delete/${id}`,'DELETE')
-}
+// export function deleteHoliday(id) {
+//     return sendRequest(`${BASE_URL}/api/holiday/delete/${id}`,'DELETE')
+// }
 
-export async function imageUpload(formData){
-    const response = await axios.post(
-        `${BASE_URL}/api/upload/image`,
-        formData
-      )
-      return response;
-}
+// export async function imageUpload(formData){
+//     const response = await axios.post(
+//         `${BASE_URL}/api/upload/image`,
+//         formData
+//       )
+//       return response;
+// }

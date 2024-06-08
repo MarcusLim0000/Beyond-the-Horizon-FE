@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 export default function Profile({ user, setUser }) {
+  
   const navigate = useNavigate();
 
   function handleCreateHoliday() {
@@ -9,6 +10,7 @@ export default function Profile({ user, setUser }) {
 
   return (
     <div>
+      <h1>Welcome, {user.name}</h1>
       <p>This is the profile page!</p>
       <div>
         <button onClick={handleCreateHoliday}>Create a holiday here!</button>

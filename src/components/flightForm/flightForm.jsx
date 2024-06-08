@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {createFlight} from "../../utilities/users-api";
 
 export default function FlightForm() {
   const [formData, setFormData] = useState({
@@ -18,11 +19,24 @@ export default function FlightForm() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission, e.g., send data to the server
-    console.log(formData);
-  };
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    try {
+      await createFlight(formData);
+      alert('Flight created successfully!');
+      setFormData({
+        flightNumber: '',
+        date: '',
+        time: '',
+        airport: '',
+        gate: '',
+        cost: '',
+      });
+    } catch (error) {
+      console.error('Error creating flight:', error);
+      alert('Failed to create flight.');
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
