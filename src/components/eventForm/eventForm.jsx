@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import {createFlight} from "../../utilities/users-api";
+import { createEvent } from "../../utilities/users-api";
 
-export default function FlightForm() {
+export default function EventForm() {
   const [formData, setFormData] = useState({
-    flightNumber: '',
+    title: '',
+    address: '',
     date: '',
-    time: '',
-    airport: '',
-    gate: '',
+    startTime: '',
+    endTime: '',
     cost: '',
   });
 
@@ -26,31 +26,42 @@ export default function FlightForm() {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await createFlight(formData);
-      alert('Flight created successfully!');
+      await createEvent(formData);
+      alert('Event created successfully!');
       setFormData({
-        flightNumber: '',
+        title: '',
+        address: '',
         date: '',
-        time: '',
-        airport: '',
-        gate: '',
+        startTime: '',
+        endTime: '',
         cost: '',
       });
     } catch (error) {
-      console.error('Error creating flight:', error);
-      alert('Failed to create flight.');
+      console.error('Error creating event:', error);
+      alert('Failed to create event.');
     }
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="flightNumber">Flight Number:</label>
+        <label htmlFor="title">Event Title:</label>
         <input
           type="text"
-          id="flightNumber"
-          name="flightNumber"
-          value={formData.flightNumber}
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="address">Address:</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          value={formData.address}
           onChange={handleChange}
           required
         />
@@ -67,34 +78,23 @@ export default function FlightForm() {
         />
       </div>
       <div>
-        <label htmlFor="time">Time:</label>
+        <label htmlFor="startTime">Start Time:</label>
         <input
           type="time"
-          id="time"
-          name="time"
-          value={formData.time}
+          id="startTime"
+          name="startTime"
+          value={formData.startTime}
           onChange={handleChange}
           required
         />
       </div>
       <div>
-        <label htmlFor="airport">Airport:</label>
+        <label htmlFor="endTime">End Time:</label>
         <input
-          type="text"
-          id="airport"
-          name="airport"
-          value={formData.airport}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="gate">Gate:</label>
-        <input
-          type="text"
-          id="gate"
-          name="gate"
-          value={formData.gate}
+          type="time"
+          id="endTime"
+          name="endTime"
+          value={formData.endTime}
           onChange={handleChange}
           required
         />

@@ -15,6 +15,14 @@ export function createFlight(userInput) {
     return sendRequest(`${BASE_URL}/api/flight/create`, 'POST', userInput)
 }
 
+export function createHotel(userInput) {
+    return sendRequest(`${BASE_URL}/api/hotel/create`, 'POST', userInput)
+}
+
+export function createEvent(userInput) {
+    return sendRequest(`${BASE_URL}/api/event/create`, 'POST', userInput)
+}
+
 // export function deleteHoliday(id) {
 //     return sendRequest(`${BASE_URL}/api/holiday/delete/${id}`,'DELETE')
 // }
