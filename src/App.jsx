@@ -21,13 +21,17 @@ function App() {
   return (
     <div>
       <nav>
-        <Link to="/">
+        {!user ? (
+          <Link to="/">
+            <div className="logo">img goes here</div>
+          </Link>
+        ) : (
           <div className="logo">img goes here</div>
-        </Link>
+        )}
         {!user ? (
           <>
             <Link to="/signIn">
-              <button className="signIN_button">Sign In</button>
+              <button className="signIn_button">Sign In</button>
             </Link>
             <Link to="/signUp">
               <button className="signUp_button">Sign Up</button>

@@ -1,25 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import FlightForm from '../flightForm/flightForm';
-import HotelForm from '../hotelForm/hotelForm';
-import EventForm from '../eventForm/eventForm';
+import { createHoliday } from "../../utilities/users-api";
 
 export default function CreateHoliday() {
-  const [showFlightForm, setShowFlightForm] = useState(false);
-  const [showHotelForm, setShowHotelForm] = useState(false);
-  const [showEventForm, setShowEventForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    country: "",
+    startDate: "",
+    endDate: "",
+  });
 
-  const handleFlightClick = () => {
-    setShowFlightForm(true);
-  };
+  function handleChange(e) {
+    const { name, value } = e.target;
 
-  const handleHotelClick = () => {
-    setShowHotelForm(true);
-  };
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
 
-  const handleEventClick = () => {
-    setShowEventForm(true);
-  };
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    try {
+      await createHoliday(formData);
+      alert("Holiday created successfully!");
+      setFormData({
+        name: "",
+        country: "",
+        startDate: "",
+        endDate: "",
+      });
+    } catch (error) {
+      console.error("Error creating holiday:", error);
+      alert("Failed to create holiday.");
+    }
+  }
 
   return (
     <>
@@ -28,18 +43,76 @@ export default function CreateHoliday() {
       </nav>
       <h2>Create a New Holiday</h2>
       <div>
-      <button onClick={handleHotelClick}>Add your lodgings here</button>
-      {showHotelForm && <HotelForm />}
-      </div>
-      <div>
-      <button onClick={handleFlightClick}>Add a flight here</button>
-      {showFlightForm && <FlightForm />}
-      </div>
-      <div>
-      <button onClick={handleEventClick}>Add an event here</button>
-      {showEventForm && <EventForm />}
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="country">Country:</label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="startDate">Start Date:</label>
+            <input
+              type="date"
+              id="startDate"
+              name="startDate"
+              value={formData.startDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="endDate">End Date:</label>
+            <input
+              type="date"
+              id="endDate"
+              name="endDate"
+              value={formData.endDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </>
   );
 }
 
+// return (
+//   <>
+//     <nav>
+//       <Link to="/profile">Go back to profile page</Link>
+//     </nav>
+//     <h2>Create a New Holiday</h2>
+//     <div>
+//       <button onClick={handleHotelClick}>Add your lodgings here</button>
+//       {showHotelForm && <HotelForm />}
+//     </div>
+//     <div>
+//       <button onClick={handleFlightClick}>Add a flight here</button>
+//       {showFlightForm && <FlightForm />}
+//     </div>
+//     <div>
+//       <button onClick={handleEventClick}>Add an event here</button>
+//       {showEventForm && <EventForm />}
+//     </div>
+//   </>
+// );
+// }

@@ -1,38 +1,33 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { deleteListing, getFlight } from "../../utilities/users-api";
+import { Link } from "react-router-dom";
+import { deleteHoliday, getHoliday } from "../../utilities/users-api";
 
 export default function Profile({ user, setUser }) {
-  const [flights, setFlights] = useState([]);
+  const [holidays, setHolidays] = useState([]);
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
 
-  function handleCreateHoliday() {
-    navigate("/create-holiday"); // Navigate to the create-holiday page
-  }
-
-  const fetchFlights = async () => {
+  async function fetchHolidays() {
     try {
       if (!token) {
         alert("Unauthorised user! Someone call 911!");
         return;
       }
       const userId = user._id;
-      const data = await getFlight(userId);
-      setFlights(data);
+      const data = await getHoliday(userId);
+      setHolidays(data);
     } catch (error) {
-      console.error("Error fetching flights:", error);
+      console.error("Error fetching listings:", error);
     }
-  };
+  }
 
   useEffect(() => {
-    fetchFlights();
+    fetchHolidays();
   }, []);
 
   async function handleDelete(id) {
     try {
-      await deleteListing(id);
-      fetchFlights();
+      await deleteHoliday(id);
+      fetchHolidays();
     } catch (error) {
       console.log(error);
     }
@@ -42,22 +37,20 @@ export default function Profile({ user, setUser }) {
     <div>
       <h1>Welcome, {user.name}</h1>
       <p>This is the profile page!</p>
-      <div className="flights-container">
-        {flights.length > 0 ? (
-          flights.map((flight) => (
-            <div key={flight._id} className="flight-card">
-              <h3>Flight Details</h3>
-              <p>Flight Number: {flight.flightNumber}</p>
-              <p>Airport: {flight.airport}</p>
+      <div className="holidays-container">
+        {holidays.length > 0 ? (
+          holidays.map((holiday) => (
+            <div key={holiday._id} className="holiday-card">
+              <h3>Holiday Details</h3>
+              <p>Name: {holiday.name}</p>
+              <p>Country: {holiday.country}</p>
               <p>
-                Departure Date: {new Date(flight.date).toLocaleDateString()}
+                Start Date: {new Date(holiday.startDate).toLocaleDateString()}
               </p>
-              <p>Arrival Date: {new Date(flight.time).toLocaleDateString()}</p>
-              <p>Gate: {flight.gate}</p>
-              <p>Cost: {flight.cost}</p>
+              <p>End Date: {new Date(holiday.endDate).toLocaleDateString()}</p>
               <button
                 onClick={() => {
-                  handleDelete(flight._id);
+                  handleDelete(holiday._id);
                 }}
               >
                 Delete
@@ -66,11 +59,13 @@ export default function Profile({ user, setUser }) {
             </div>
           ))
         ) : (
-          <p>No flights available.</p>
+          <p>No holidays available.</p>
         )}
       </div>
       <div>
-        <button onClick={handleCreateHoliday}>Create a holiday here!</button>
+        <Link to="/create-holiday">
+          <button>Create a holiday here!</button>
+        </Link>
       </div>
     </div>
   );
