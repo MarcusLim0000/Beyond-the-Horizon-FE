@@ -34,8 +34,8 @@ export function deleteFlight(id) {
     return sendRequest(`${BASE_URL}/api/flight/delete/${id}`,'DELETE')
 }
 
-export async function getFlight(id) {
-    return sendRequest(`${BASE_URL}/api/flight/${id}`)
+export async function getFlights(holidayId) {
+    return sendRequest(`${BASE_URL}/api/flight/${holidayId}`)
 }
 
 export async function getHoliday(id) {
