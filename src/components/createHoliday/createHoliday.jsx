@@ -94,25 +94,3 @@ export default function CreateHoliday() {
     </>
   );
 }
-
-// return (
-//   <>
-//     <nav>
-//       <Link to="/profile">Go back to profile page</Link>
-//     </nav>
-//     <h2>Create a New Holiday</h2>
-//     <div>
-//       <button onClick={handleHotelClick}>Add your lodgings here</button>
-//       {showHotelForm && <HotelForm />}
-//     </div>
-//     <div>
-//       <button onClick={handleFlightClick}>Add a flight here</button>
-//       {showFlightForm && <FlightForm />}
-//     </div>
-//     <div>
-//       <button onClick={handleEventClick}>Add an event here</button>
-//       {showEventForm && <EventForm />}
-//     </div>
-//   </>
-// );
-// }

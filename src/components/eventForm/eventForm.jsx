@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { createEvent } from "../../utilities/users-api";
 
-export default function EventForm() {
+export default function EventForm({ holidayId }) {
   const [formData, setFormData] = useState({
+    holidayId: holidayId,
     title: '',
     address: '',
     date: '',
@@ -29,6 +30,7 @@ export default function EventForm() {
       await createEvent(formData);
       alert('Event created successfully!');
       setFormData({
+        holidayId: holidayId,
         title: '',
         address: '',
         date: '',

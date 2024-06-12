@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import {createHotel} from "../../utilities/users-api"
 
-export default function HotelForm() {
+export default function HotelForm({ holidayId }) {
   const [formData, setFormData] = useState({
+    holidayId: holidayId,
     name: '',
     address: '',
     rooms: '',
@@ -35,6 +36,7 @@ export default function HotelForm() {
       await createHotel(formData);
       alert('Lodgings created successfully!');
       setFormData({
+        holidayId: holidayId,
         name: '',
         address: '',
         rooms: '',
