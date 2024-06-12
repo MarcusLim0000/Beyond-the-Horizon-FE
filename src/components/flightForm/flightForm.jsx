@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import {createFlight} from "../../utilities/users-api";
 
-export default function FlightForm() {
+export default function FlightForm({ holidayId }) {
   const [formData, setFormData] = useState({
+    holidayId: holidayId,
     flightNumber: '',
     date: '',
     time: '',
@@ -29,6 +30,7 @@ export default function FlightForm() {
       await createFlight(formData);
       alert('Flight created successfully!');
       setFormData({
+        holidayId: holidayId,
         flightNumber: '',
         date: '',
         time: '',

@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteHoliday, getHoliday } from "../../utilities/users-api";
 
-export default function Profile({ user, setUser }) {
+export default function Profile({ user }) {
   const [holidays, setHolidays] = useState([]);
   const token = localStorage.getItem("token");
 
   async function fetchHolidays() {
     try {
       if (!token) {
-        alert("Unauthorised user! Someone call 911!");
+        alert("Unauthorized user! Someone call 911!");
         return;
       }
       const userId = user._id;
@@ -55,7 +55,9 @@ export default function Profile({ user, setUser }) {
               >
                 Delete
               </button>
-              <button>Edit</button>
+              <Link to={`/details/${holiday._id}`}>
+                <button>Details</button>
+              </Link>
             </div>
           ))
         ) : (
