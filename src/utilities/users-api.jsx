@@ -38,6 +38,14 @@ export async function getFlights(holidayId) {
     return sendRequest(`${BASE_URL}/api/flight/${holidayId}`)
 }
 
+export async function getHotels(holidayId) {
+    return sendRequest(`${BASE_URL}/api/hotel/${holidayId}`)
+}
+
+export async function getEvents(holidayId) {
+    return sendRequest(`${BASE_URL}/api/event/${holidayId}`)
+}
+
 export async function getHoliday(id) {
     return sendRequest(`${BASE_URL}/api/holiday/${id}`)
 }
