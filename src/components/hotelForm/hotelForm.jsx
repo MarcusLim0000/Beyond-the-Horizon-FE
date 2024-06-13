@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import {createHotel} from "../../utilities/users-api"
+import React, { useState, useEffect } from 'react';
+import { createHotel, updateHotel } from '../../utilities/users-api';
 
-export default function HotelForm({ holidayId }) {
+export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
   const [formData, setFormData] = useState({
     holidayId: holidayId,
     name: '',
@@ -12,7 +12,25 @@ export default function HotelForm({ holidayId }) {
     checkOutDate: '',
     checkOutTime: '',
     cost: '',
+    ...initialData,
   });
+
+  useEffect(() => {
+    if (initialData.checkInDate) {
+      const checkInDate = new Date(initialData.checkInDate).toISOString().split('T')[0];
+      setFormData(prevState => ({
+        ...prevState,
+        checkInDate,
+      }));
+    }
+    if (initialData.checkOutDate) {
+      const checkOutDate = new Date(initialData.checkOutDate).toISOString().split('T')[0];
+      setFormData(prevState => ({
+        ...prevState,
+        checkOutDate,
+      }));
+    }
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,8 +51,12 @@ export default function HotelForm({ holidayId }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await createHotel(formData);
-      alert('Lodgings created successfully!');
+      if (initialData._id) {
+        await updateHotel(initialData._id, formData);
+      } else {
+        await createHotel(formData);
+      }
+      onSubmit(formData);
       setFormData({
         holidayId: holidayId,
         name: '',
