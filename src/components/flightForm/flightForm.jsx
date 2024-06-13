@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import {createFlight} from "../../utilities/users-api";
+import React, { useState, useEffect } from 'react';
+import { createFlight, updateFlight } from '../../utilities/users-api';
 
-export default function FlightForm({ holidayId }) {
+export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
   const [formData, setFormData] = useState({
     holidayId: holidayId,
     flightNumber: '',
@@ -10,14 +10,21 @@ export default function FlightForm({ holidayId }) {
     airport: '',
     gate: '',
     cost: '',
+    ...initialData, // Pre-fill form with initial data if available
   });
+
+  useEffect(() => {
+    if (initialData.date) {
+      const date = new Date(initialData.date).toISOString().split('T')[0];
+      setFormData(prevState => ({
+        ...prevState,
+        date,
+      }));
+    }
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'cost' && value < 0) {
-      alert('Cost cannot be negative');
-      return;
-    }
     setFormData({
       ...formData,
       [name]: value,
@@ -27,8 +34,12 @@ export default function FlightForm({ holidayId }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await createFlight(formData);
-      alert('Flight created successfully!');
+      if (initialData._id) {
+        await updateFlight(initialData._id, formData);
+      } else {
+        await createFlight(formData);
+      }
+      onSubmit(formData);
       setFormData({
         holidayId: holidayId,
         flightNumber: '',
@@ -40,7 +51,6 @@ export default function FlightForm({ holidayId }) {
       });
     } catch (error) {
       console.error('Error creating flight:', error);
-      alert('Failed to create flight.');
     }
   }
 
@@ -108,7 +118,6 @@ export default function FlightForm({ holidayId }) {
           id="cost"
           name="cost"
           value={formData.cost}
-          step="0.01"
           onChange={handleChange}
           required
         />

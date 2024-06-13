@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { createEvent } from "../../utilities/users-api";
+import React, { useState, useEffect } from 'react';
+import { createEvent, updateEvent } from '../../utilities/users-api';
 
-export default function EventForm({ holidayId }) {
+export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
   const [formData, setFormData] = useState({
     holidayId: holidayId,
     title: '',
@@ -10,7 +10,18 @@ export default function EventForm({ holidayId }) {
     startTime: '',
     endTime: '',
     cost: '',
+    ...initialData,
   });
+
+  useEffect(() => {
+    if (initialData.date) {
+      const date = new Date(initialData.date).toISOString().split('T')[0];
+      setFormData(prevState => ({
+        ...prevState,
+        date,
+      }));
+    }
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,8 +38,12 @@ export default function EventForm({ holidayId }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await createEvent(formData);
-      alert('Event created successfully!');
+      if (initialData._id) {
+        await updateEvent(initialData._id, formData);
+      } else {
+        await createEvent(formData);
+      }
+      onSubmit(formData);
       setFormData({
         holidayId: holidayId,
         title: '',
