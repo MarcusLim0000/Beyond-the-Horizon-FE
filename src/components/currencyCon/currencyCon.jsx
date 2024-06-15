@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { convertCurrency } from '../../utilities/currency-services';
+import "./currencyCon.css"
 
 export default function CurrencyConverter() {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ export default function CurrencyConverter() {
 
       // Perform the calculation on the frontend
       const rate = result.data; // Use the `data` field from the API response
-      const converted = formData.amount * rate;
+      const converted = (formData.amount * rate).toFixed(2); // Format to 2 decimal places
       setConvertedAmount(converted);
 
     } catch (error) {
@@ -42,7 +43,7 @@ export default function CurrencyConverter() {
           <button>Go back to profile</button>
         </Link>
       </nav>
-      <div>
+      <div className="currency-container">
         <h2>Currency Converter</h2>
         <form onSubmit={handleSubmit}>
           <div>
@@ -84,10 +85,10 @@ export default function CurrencyConverter() {
           <button type="submit">Convert</button>
         </form>
         {conversionResult && (
-          <div>
+          <div className='result'>
             <h3>Conversion Result:</h3>
-            <p>Rate: {conversionResult.data}</p>
-            <p>Converted Amount: {convertedAmount}</p>
+            <p>Rate: {conversionResult.data.toFixed(2)}</p>
+            <p>Converted Amount: $ {convertedAmount}</p>
           </div>
         )}
       </div>
