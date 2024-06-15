@@ -8,6 +8,7 @@ import Home from "./components/Home/Home";
 import Profile from "./components/Profile/profile";
 import CreateHoliday from "./components/createHoliday/createHoliday";
 import ShowForms from "./components/showForms/showForms";
+import CurrencyConverter from "./components/currencyCon/currencyCon";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -21,27 +22,32 @@ function App() {
 
   return (
     <div>
-      <nav>
-        {!user ? (
-          <Link to="/">
-            <div className="logo">img goes here</div>
-          </Link>
-        ) : (
+    <nav>
+      {!user ? (
+        <Link to="/">
           <div className="logo">img goes here</div>
-        )}
-        {!user ? (
-          <>
-            <Link to="/signIn">
-              <button className="signIn_button">Sign In</button>
-            </Link>
-            <Link to="/signUp">
-              <button className="signUp_button">Sign Up</button>
-            </Link>
-          </>
-        ) : (
-          <button onClick={handleSignOut} className="signOut_button">Sign Out</button>
-        )}
-      </nav>
+        </Link>
+      ) : (
+        <>
+          <div className="logo">img goes here</div>
+          <Link to="/currency-converter">
+            <button className='currency_button'>Convert your currency here!</button>
+          </Link>
+        </>
+      )}
+      {!user ? (
+        <>
+          <Link to="/signIn">
+            <button className="signIn_button">Sign In</button>
+          </Link>
+          <Link to="/signUp">
+            <button className="signUp_button">Sign Up</button>
+          </Link>
+        </>
+      ) : (
+        <button onClick={handleSignOut} className="signOut_button">Sign Out</button>
+      )}
+    </nav>
       <main>
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -49,7 +55,8 @@ function App() {
           <Route exact path="/signUp" element={<SignUp />} />
           <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />} />
           <Route exact path="/create-holiday" element={<CreateHoliday />} />
-          <Route exact path="/details/:holidayId" element={<ShowForms />} /> {/* Updated Route */}
+          <Route exact path="/details/:holidayId" element={<ShowForms />} />
+          <Route exact path="/currency-converter" element={<CurrencyConverter />} />
         </Routes>
       </main>
     </div>
