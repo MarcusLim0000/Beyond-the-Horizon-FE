@@ -22,34 +22,36 @@ function App() {
 
   return (
     <div>
-<header>
-  <div className="logo-container">
-    <Link to="/">
-      <div className="logo"></div>
-    </Link>
-  </div>
-  <nav>
-    {!user ? (
-      <>
-        <Link to="/signIn">
-          <button className="signIn_button">Sign In</button>
-        </Link>
-        <Link to="/signUp">
-          <button className="signUp_button">Sign Up</button>
-        </Link>
-      </>
-    ) : (
-      <>
-        <Link to="/currency-converter">
-          <button className="currency_button">Convert your currency here!</button>
-        </Link>
-        <button onClick={handleSignOut} className="signOut_button">Sign Out</button>
-      </>
-    )}
-  </nav>
-</header>
-
-
+      <header>
+        <div className="logo-container">
+          {!user ? (
+            <Link to="/">
+              <div className="logo"></div>
+            </Link>
+          ) : (
+            <div className="logo"></div>
+          )}
+        </div>
+        <nav>
+          {!user ? (
+            <>
+              <Link to="/signIn">
+                <button className="signIn_button">Sign In</button>
+              </Link>
+              <Link to="/signUp">
+                <button className="signUp_button">Sign Up</button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/currency-converter">
+                <button className="currency_button">Convert your currency here!</button>
+              </Link>
+              <button onClick={handleSignOut} className="signOut_button">Sign Out</button>
+            </>
+          )}
+        </nav>
+      </header>
       <main>
         <Routes>
           <Route exact path="/" element={<Home />} />

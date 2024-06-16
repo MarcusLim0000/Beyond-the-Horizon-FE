@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteHoliday, getHoliday, updateHoliday } from "../../utilities/users-api";
+import "./Profile.css"
 
 export default function Profile({ user }) {
   const [holidays, setHolidays] = useState([]);
@@ -58,9 +59,9 @@ export default function Profile({ user }) {
   };
 
   return (
-    <div>
+    <div className="profile-page">
       <h1>Welcome, {user.name}</h1>
-      <p>This is the profile page!</p>
+      <p className="welcome">Below are your holidays planned!</p>
       {editingHoliday ? (
         <form onSubmit={handleSubmit}>
           <div>
@@ -115,8 +116,7 @@ export default function Profile({ user }) {
           {holidays.length > 0 ? (
             holidays.map((holiday) => (
               <div key={holiday._id} className="holiday-card">
-                <h3>Holiday Details</h3>
-                <p>Name: {holiday.name}</p>
+                <h3>{holiday.name}</h3>
                 <p>Country: {holiday.country}</p>
                 <p>
                   Start Date: {new Date(holiday.startDate).toLocaleDateString()}
@@ -146,7 +146,7 @@ export default function Profile({ user }) {
       )}
       <div>
         <Link to="/create-holiday">
-          <button>Create a holiday here!</button>
+          <button className="createHoli">Create a holiday here!</button>
         </Link>
       </div>
     </div>

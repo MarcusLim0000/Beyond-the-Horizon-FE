@@ -1,8 +1,12 @@
 .introduction {
-    font-size: large;
-    font-weight: bold;
-    font-family: "Playwrite NL", cursive;
-  }
+  font-size: xx-large;
+  font-weight: bold;
+  font-family: "Playwrite NL", cursive;
+  background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
 
 
   
