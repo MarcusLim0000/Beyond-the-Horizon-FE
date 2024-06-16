@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createHoliday } from "../../utilities/users-api";
+import "./createHoliday.css"
 
 export default function CreateHoliday() {
   const [formData, setFormData] = useState({
@@ -38,11 +39,10 @@ export default function CreateHoliday() {
 
   return (
     <>
-      <nav>
-        <Link to="/profile">Go back to profile page</Link>
-      </nav>
-      <h2>Create a New Holiday</h2>
-      <div>
+        <Link to="/profile">
+        <button className="profile-button">Go back to profile page.</button>
+        </Link>
+      <div className="form-card">
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name">Name:</label>
