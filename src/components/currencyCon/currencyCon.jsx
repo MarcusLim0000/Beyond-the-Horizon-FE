@@ -1,18 +1,34 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { convertCurrency } from '../../utilities/currency-services';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { convertCurrency } from "../../utilities/currency-services";
 import "./currencyCon.css";
 
 export default function CurrencyConverter() {
   const [formData, setFormData] = useState({
-    yourCurrency: '',
-    targetCurrency: '',
-    amount: '',
+    yourCurrency: "",
+    targetCurrency: "",
+    amount: "",
   });
   const [conversionResult, setConversionResult] = useState(null);
   const [convertedAmount, setConvertedAmount] = useState(null);
 
-  const currencies = ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "IDR", "CNY", "NZD", "SGD", "MYR", "THB", "RUB", "CHF", "PHP"];
+  const currencies = [
+    "USD",
+    "EUR",
+    "GBP",
+    "JPY",
+    "AUD",
+    "CAD",
+    "IDR",
+    "CNY",
+    "NZD",
+    "SGD",
+    "MYR",
+    "THB",
+    "RUB",
+    "CHF",
+    "PHP",
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,23 +41,24 @@ export default function CurrencyConverter() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await convertCurrency(formData.yourCurrency, formData.targetCurrency);
+      const result = await convertCurrency(
+        formData.yourCurrency,
+        formData.targetCurrency
+      );
       setConversionResult(result);
 
-      // Perform the calculation on the frontend
-      const rate = result.data; // Use the `data` field from the API response
-      const converted = (formData.amount * rate).toFixed(2); // Format to 2 decimal places
+      const rate = result.data;
+      const converted = (formData.amount * rate).toFixed(2);
       setConvertedAmount(converted);
-
     } catch (error) {
-      console.error('Error converting currency:', error);
+      console.error("Error converting currency:", error);
     }
   };
 
   return (
     <>
       <nav>
-        <Link to='/profile'>
+        <Link to="/profile">
           <button>Go back to profile</button>
         </Link>
       </nav>
@@ -92,16 +109,19 @@ export default function CurrencyConverter() {
               onChange={handleChange}
               placeholder="Enter the amount"
               min="0"
+              step="0.01"
               required
             />
           </div>
           <button type="submit">Convert</button>
         </form>
         {conversionResult && (
-          <div className='result'>
+          <div className="result">
             <h3>Conversion Result:</h3>
             <p>Rate: {conversionResult.data.toFixed(2)}</p>
-            <p>Converted Amount: {convertedAmount} {formData.targetCurrency}</p>
+            <p>
+              Converted Amount: {convertedAmount} {formData.targetCurrency}
+            </p>
           </div>
         )}
       </div>

@@ -1,32 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { createHotel, updateHotel } from '../../utilities/users-api';
+import React, { useState, useEffect } from "react";
+import { createHotel, updateHotel } from "../../utilities/users-api";
 
 export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
   const [formData, setFormData] = useState({
     holidayId: holidayId,
-    name: '',
-    address: '',
-    rooms: '',
-    checkInDate: '',
-    checkInTime: '',
-    checkOutDate: '',
-    checkOutTime: '',
-    cost: '',
+    name: "",
+    address: "",
+    rooms: "",
+    checkInDate: "",
+    checkInTime: "",
+    checkOutDate: "",
+    checkOutTime: "",
+    cost: "",
     ...initialData,
   });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (initialData.checkInDate) {
-      const checkInDate = new Date(initialData.checkInDate).toISOString().split('T')[0];
-      setFormData(prevState => ({
+      const checkInDate = new Date(initialData.checkInDate)
+        .toISOString()
+        .split("T")[0];
+      setFormData((prevState) => ({
         ...prevState,
         checkInDate,
       }));
     }
     if (initialData.checkOutDate) {
-      const checkOutDate = new Date(initialData.checkOutDate).toISOString().split('T')[0];
-      setFormData(prevState => ({
+      const checkOutDate = new Date(initialData.checkOutDate)
+        .toISOString()
+        .split("T")[0];
+      setFormData((prevState) => ({
         ...prevState,
         checkOutDate,
       }));
@@ -37,26 +41,39 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
     const { name, value } = e.target;
     const updatedFormData = { ...formData, [name]: value };
 
-    // Validate dates and times
-    if (name === 'checkInDate' || name === 'checkOutDate' || name === 'checkInTime' || name === 'checkOutTime') {
+    if (
+      name === "checkInDate" ||
+      name === "checkOutDate" ||
+      name === "checkInTime" ||
+      name === "checkOutTime"
+    ) {
       const newErrors = { ...errors };
-      const checkInDate = new Date(updatedFormData.checkInDate + 'T' + (updatedFormData.checkInTime || '00:00'));
-      const checkOutDate = new Date(updatedFormData.checkOutDate + 'T' + (updatedFormData.checkOutTime || '00:00'));
+      const checkInDate = new Date(
+        updatedFormData.checkInDate +
+          "T" +
+          (updatedFormData.checkInTime || "00:00")
+      );
+      const checkOutDate = new Date(
+        updatedFormData.checkOutDate +
+          "T" +
+          (updatedFormData.checkOutTime || "00:00")
+      );
 
       if (checkInDate > checkOutDate) {
-        newErrors.date = "Check-out date and time cannot be earlier than check-in date and time.";
+        newErrors.date =
+          "Check-out date and time cannot be earlier than check-in date and time.";
       } else {
         delete newErrors.date;
       }
       setErrors(newErrors);
     }
 
-    if (name === 'cost' && value < 0) {
-      alert('Cost cannot be negative');
+    if (name === "cost" && value < 0) {
+      alert("Cost cannot be negative");
       return;
     }
-    if (name === 'rooms' && value < 1) {
-      alert('Rooms cannot be less than 1');
+    if (name === "rooms" && value < 1) {
+      alert("Rooms cannot be less than 1");
       return;
     }
     setFormData(updatedFormData);
@@ -64,11 +81,16 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // Final validation check before submission
-    const checkInDate = new Date(formData.checkInDate + 'T' + formData.checkInTime);
-    const checkOutDate = new Date(formData.checkOutDate + 'T' + formData.checkOutTime);
+    const checkInDate = new Date(
+      formData.checkInDate + "T" + formData.checkInTime
+    );
+    const checkOutDate = new Date(
+      formData.checkOutDate + "T" + formData.checkOutTime
+    );
     if (checkInDate > checkOutDate) {
-      setErrors({ date: "Check-out date and time cannot be earlier than check-in date and time." });
+      setErrors({
+        date: "Check-out date and time cannot be earlier than check-in date and time.",
+      });
       return;
     }
     try {
@@ -80,19 +102,19 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
       onSubmit(formData);
       setFormData({
         holidayId: holidayId,
-        name: '',
-        address: '',
-        rooms: '',
-        checkInDate: '',
-        checkInTime: '',
-        checkOutDate: '',
-        checkOutTime: '',
-        cost: '',
+        name: "",
+        address: "",
+        rooms: "",
+        checkInDate: "",
+        checkInTime: "",
+        checkOutDate: "",
+        checkOutTime: "",
+        cost: "",
       });
       setErrors({});
     } catch (error) {
-      console.error('Error creating hotel:', error);
-      alert('Failed to create hotel.');
+      console.error("Error creating hotel:", error);
+      alert("Failed to create hotel.");
     }
   }
 

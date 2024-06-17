@@ -1,5 +1,5 @@
 body {
-  background-image: url('./assets/background.jpg');
+  background-image: url("./assets/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -8,7 +8,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 
 header {
   display: flex;
@@ -24,12 +23,12 @@ header {
 }
 
 .logo {
-  background-image: url('./assets/logo.jpg');
+  background-image: url("./assets/logo.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 200px; /* Adjust the width as needed */
-  height: 200px; /* Adjust the height as needed */
+  width: 200px;
+  height: 200px;
 }
 
 nav {
@@ -41,10 +40,10 @@ nav button {
   background-color: #1249b7;
   color: white;
   border: none;
-  padding: 15px 30px; /* Increased padding for larger buttons */
-  margin: 0 10px; /* Adjusted margin for spacing */
+  padding: 15px 30px;
+  margin: 0 10px;
   cursor: pointer;
-  font-size: 18px; /* Increased font size */
+  font-size: 18px;
   border-radius: 5px;
 }
 

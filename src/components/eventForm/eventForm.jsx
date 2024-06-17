@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { createEvent, updateEvent } from '../../utilities/users-api';
+import React, { useState, useEffect } from "react";
+import { createEvent, updateEvent } from "../../utilities/users-api";
 
 export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
   const [formData, setFormData] = useState({
     holidayId: holidayId,
-    title: '',
-    address: '',
-    date: '',
-    startTime: '',
-    endTime: '',
-    cost: '',
+    title: "",
+    address: "",
+    date: "",
+    startTime: "",
+    endTime: "",
+    cost: "",
     ...initialData,
   });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (initialData.date) {
-      const date = new Date(initialData.date).toISOString().split('T')[0];
-      setFormData(prevState => ({
+      const date = new Date(initialData.date).toISOString().split("T")[0];
+      setFormData((prevState) => ({
         ...prevState,
         date,
       }));
@@ -28,11 +28,16 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
     const { name, value } = e.target;
     const updatedFormData = { ...formData, [name]: value };
 
-    // Validate times
-    if (name === 'startTime' || name === 'endTime') {
+    if (name === "startTime" || name === "endTime") {
       const newErrors = { ...errors };
-      const startTime = new Date(formData.date + 'T' + (name === 'startTime' ? value : formData.startTime));
-      const endTime = new Date(formData.date + 'T' + (name === 'endTime' ? value : formData.endTime));
+      const startTime = new Date(
+        formData.date +
+          "T" +
+          (name === "startTime" ? value : formData.startTime)
+      );
+      const endTime = new Date(
+        formData.date + "T" + (name === "endTime" ? value : formData.endTime)
+      );
 
       if (startTime > endTime) {
         newErrors.time = "End time cannot be earlier than start time.";
@@ -42,8 +47,8 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
       setErrors(newErrors);
     }
 
-    if (name === 'cost' && value < 0) {
-      alert('Cost cannot be negative');
+    if (name === "cost" && value < 0) {
+      alert("Cost cannot be negative");
       return;
     }
 
@@ -52,9 +57,8 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // Final validation check before submission
-    const startTime = new Date(formData.date + 'T' + formData.startTime);
-    const endTime = new Date(formData.date + 'T' + formData.endTime);
+    const startTime = new Date(formData.date + "T" + formData.startTime);
+    const endTime = new Date(formData.date + "T" + formData.endTime);
     if (startTime > endTime) {
       setErrors({ time: "End time cannot be earlier than start time." });
       return;
@@ -68,17 +72,17 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
       onSubmit(formData);
       setFormData({
         holidayId: holidayId,
-        title: '',
-        address: '',
-        date: '',
-        startTime: '',
-        endTime: '',
-        cost: '',
+        title: "",
+        address: "",
+        date: "",
+        startTime: "",
+        endTime: "",
+        cost: "",
       });
       setErrors({});
     } catch (error) {
-      console.error('Error creating event:', error);
-      alert('Failed to create event.');
+      console.error("Error creating event:", error);
+      alert("Failed to create event.");
     }
   }
 

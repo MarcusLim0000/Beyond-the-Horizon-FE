@@ -1,6 +1,6 @@
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { getUser, logOut } from "./utilities/user-services"; 
+import { getUser, logOut } from "./utilities/user-services";
 import "./App.css";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
@@ -45,9 +45,13 @@ function App() {
           ) : (
             <>
               <Link to="/currency-converter">
-                <button className="currency_button">Convert your currency here!</button>
+                <button className="currency_button">
+                  Convert your currency here!
+                </button>
               </Link>
-              <button onClick={handleSignOut} className="signOut_button">Sign Out</button>
+              <button onClick={handleSignOut} className="signOut_button">
+                Sign Out
+              </button>
             </>
           )}
         </nav>
@@ -55,12 +59,24 @@ function App() {
       <main>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/signIn" element={<SignIn setUser={setUser} user={user} />} />
+          <Route
+            exact
+            path="/signIn"
+            element={<SignIn setUser={setUser} user={user} />}
+          />
           <Route exact path="/signUp" element={<SignUp />} />
-          <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />} />
+          <Route
+            exact
+            path="/profile"
+            element={<Profile user={user} setUser={setUser} />}
+          />
           <Route exact path="/create-holiday" element={<CreateHoliday />} />
           <Route exact path="/details/:holidayId" element={<ShowForms />} />
-          <Route exact path="/currency-converter" element={<CurrencyConverter />} />
+          <Route
+            exact
+            path="/currency-converter"
+            element={<CurrencyConverter />}
+          />
         </Routes>
       </main>
     </div>

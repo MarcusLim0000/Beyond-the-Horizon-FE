@@ -1,4 +1,14 @@
-import { getFlights, getHotels, getEvents, deleteFlight, deleteHotel, deleteEvent, updateFlight, updateHotel, updateEvent } from "../utilities/users-api"; // Ensure these functions are correctly imported
+import {
+  getFlights,
+  getHotels,
+  getEvents,
+  deleteFlight,
+  deleteHotel,
+  deleteEvent,
+  updateFlight,
+  updateHotel,
+  updateEvent,
+} from "../utilities/users-api";
 
 export async function fetchFlights(holidayId) {
   try {
@@ -6,7 +16,7 @@ export async function fetchFlights(holidayId) {
     return flightData;
   } catch (error) {
     console.error("Error fetching flights:", error);
-    throw error; // rethrow the error to handle it in the calling component
+    throw error;
   }
 }
 
@@ -16,7 +26,7 @@ export async function fetchHotels(holidayId) {
     return hotelData;
   } catch (error) {
     console.error("Error fetching hotels:", error);
-    throw error; // rethrow the error to handle it in the calling component
+    throw error;
   }
 }
 
@@ -26,7 +36,7 @@ export async function fetchEvents(holidayId) {
     return eventData;
   } catch (error) {
     console.error("Error fetching events:", error);
-    throw error; // rethrow the error to handle it in the calling component
+    throw error;
   }
 }
 

@@ -21,10 +21,13 @@ export default function CreateHoliday() {
       [name]: value,
     });
 
-    // Custom validation for dates
     if (name === "startDate" || name === "endDate") {
       const newErrors = { ...errors };
-      if (formData.startDate && formData.endDate && formData.startDate > formData.endDate) {
+      if (
+        formData.startDate &&
+        formData.endDate &&
+        formData.startDate > formData.endDate
+      ) {
         newErrors.date = "End date cannot be earlier than start date.";
       } else {
         delete newErrors.date;
@@ -35,9 +38,11 @@ export default function CreateHoliday() {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // Additional validation before submission
     if (formData.startDate > formData.endDate) {
-      setErrors({ ...errors, date: "End date cannot be earlier than start date." });
+      setErrors({
+        ...errors,
+        date: "End date cannot be earlier than start date.",
+      });
       return;
     }
     try {

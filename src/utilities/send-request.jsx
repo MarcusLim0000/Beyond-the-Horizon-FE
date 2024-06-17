@@ -1,9 +1,9 @@
-import { getToken } from './user-services';
+import { getToken } from "./user-services";
 
-export default async function sendRequest(url, method = 'GET', payload = null) {
+export default async function sendRequest(url, method = "GET", payload = null) {
   const options = { method };
   if (payload) {
-    options.headers = { 'Content-Type': 'application/json' };
+    options.headers = { "Content-Type": "application/json" };
     options.body = JSON.stringify(payload);
   }
   const token = getToken();
@@ -13,5 +13,5 @@ export default async function sendRequest(url, method = 'GET', payload = null) {
   }
   const res = await fetch(url, options);
   if (res.ok) return res.json();
-  throw new Error('Bad Request');
+  throw new Error("Bad Request");
 }

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import "./SignUp.css";
-import { signUp } from '../../utilities/users-api';
+import { signUp } from "../../utilities/users-api";
 
 function SignUp() {
   const [state, setState] = useState({
@@ -22,11 +21,10 @@ function SignUp() {
       return;
     }
 
-    // Create a new object excluding the confirmPassword field
     const { confirmPassword, ...userData } = state;
 
     try {
-      await signUp(userData); // Send userData without confirmPassword
+      await signUp(userData);
       alert("Sign up is successful! Please sign in now!");
     } catch (error) {
       console.log(error);

@@ -1,4 +1,3 @@
-/* Container for the main body */
 .main-body {
   background-color: white;
   padding: 20px;
@@ -9,10 +8,9 @@
 }
 
 .totalCost {
-  padding: 20px 20px 0px 0px;;
+  padding: 20px 20px 0px 0px;
 }
 
-/* Align h3 to the furthest left */
 .holiday-section h3 {
   text-align: left;
   width: 100%;
@@ -20,25 +18,25 @@
   padding-left: 0;
 }
 
-/* Container for the forms */
 .form-card {
-  background-color:white;
+  background-color: white;
   padding: 20px;
   margin: 20px auto;
 }
 
-/* Containers for holiday items (flights, hotels, events) */
 .holidays-container {
   display: flex;
   flex-direction: row;
   gap: 20px;
   justify-content: flex-start;
-  flex-wrap: nowrap; /* Prevents wrapping of the cards */
-  overflow-x: auto; /* Adds horizontal scrolling if necessary */
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
-/* Individual cards for flights, hotels, and events */
-.holiday-card, .flight-card, .hotel-card, .event-card {
+.holiday-card,
+.flight-card,
+.hotel-card,
+.event-card {
   background-color: rgb(66, 173, 180);
   padding: 20px;
   border-radius: 10px;
@@ -52,22 +50,24 @@
   align-items: center;
 }
 
-.flight-card h4, .hotel-card h4, .event-card h4 {
+.flight-card h4,
+.hotel-card h4,
+.event-card h4 {
   margin-top: 0;
 }
 
-.flight-card p, .hotel-card p, .event-card p {
+.flight-card p,
+.hotel-card p,
+.event-card p {
   margin: 5px 0;
 }
 
-/* Flex container for buttons */
 .button-container {
   display: flex;
-  gap: 10px; /* Space between buttons */
+  gap: 10px;
   margin-top: 10px;
 }
 
-/* Form styling */
 form {
   display: flex;
   flex-direction: column;
@@ -85,7 +85,10 @@ label {
   font-weight: bold;
 }
 
-input[type="text"], input[type="date"], input[type="time"], input[type="number"] {
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"] {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -93,7 +96,6 @@ input[type="text"], input[type="date"], input[type="time"], input[type="number"]
   box-sizing: border-box;
 }
 
-/* Button styling */
 button {
   padding: 10px 20px;
   background-color: #1249b7;
@@ -108,7 +110,6 @@ button:hover {
   background-color: #3b3f46;
 }
 
-/* Link back to profile */
 nav {
   margin-bottom: 20px;
 }
@@ -123,7 +124,6 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* Additional styles for horizontal grid format */
 .holiday-section {
   display: flex;
   flex-direction: column;
