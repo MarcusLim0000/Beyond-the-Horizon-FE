@@ -14,6 +14,7 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
     cost: '',
     ...initialData,
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (initialData.checkInDate) {
@@ -34,22 +35,42 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const updatedFormData = { ...formData, [name]: value };
+
+    // Validate dates and times
+    if (name === 'checkInDate' || name === 'checkOutDate' || name === 'checkInTime' || name === 'checkOutTime') {
+      const newErrors = { ...errors };
+      const checkInDate = new Date(updatedFormData.checkInDate + 'T' + (updatedFormData.checkInTime || '00:00'));
+      const checkOutDate = new Date(updatedFormData.checkOutDate + 'T' + (updatedFormData.checkOutTime || '00:00'));
+
+      if (checkInDate > checkOutDate) {
+        newErrors.date = "Check-out date and time cannot be earlier than check-in date and time.";
+      } else {
+        delete newErrors.date;
+      }
+      setErrors(newErrors);
+    }
+
     if (name === 'cost' && value < 0) {
       alert('Cost cannot be negative');
       return;
     }
-    if (name === 'rooms' && value < 0) {
-      alert('Rooms cannot be negative');
+    if (name === 'rooms' && value < 1) {
+      alert('Rooms cannot be less than 1');
       return;
     }
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData(updatedFormData);
   };
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    // Final validation check before submission
+    const checkInDate = new Date(formData.checkInDate + 'T' + formData.checkInTime);
+    const checkOutDate = new Date(formData.checkOutDate + 'T' + formData.checkOutTime);
+    if (checkInDate > checkOutDate) {
+      setErrors({ date: "Check-out date and time cannot be earlier than check-in date and time." });
+      return;
+    }
     try {
       if (initialData._id) {
         await updateHotel(initialData._id, formData);
@@ -68,6 +89,7 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
         checkOutTime: '',
         cost: '',
       });
+      setErrors({});
     } catch (error) {
       console.error('Error creating hotel:', error);
       alert('Failed to create hotel.');
@@ -106,6 +128,7 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
           name="rooms"
           value={formData.rooms}
           onChange={handleChange}
+          min="1"
           required
         />
       </div>
@@ -153,6 +176,7 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
           required
         />
       </div>
+      {errors.date && <p className="error">{errors.date}</p>}
       <div>
         <label htmlFor="cost">Cost:</label>
         <input
@@ -162,6 +186,7 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
           value={formData.cost}
           step="0.01"
           onChange={handleChange}
+          min="0"
           required
         />
       </div>

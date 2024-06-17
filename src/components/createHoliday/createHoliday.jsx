@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createHoliday } from "../../utilities/users-api";
-import "./createHoliday.css"
+import "./createHoliday.css";
 
 export default function CreateHoliday() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ export default function CreateHoliday() {
     endDate: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -18,10 +20,26 @@ export default function CreateHoliday() {
       ...formData,
       [name]: value,
     });
+
+    // Custom validation for dates
+    if (name === "startDate" || name === "endDate") {
+      const newErrors = { ...errors };
+      if (formData.startDate && formData.endDate && formData.startDate > formData.endDate) {
+        newErrors.date = "End date cannot be earlier than start date.";
+      } else {
+        delete newErrors.date;
+      }
+      setErrors(newErrors);
+    }
   }
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    // Additional validation before submission
+    if (formData.startDate > formData.endDate) {
+      setErrors({ ...errors, date: "End date cannot be earlier than start date." });
+      return;
+    }
     try {
       await createHoliday(formData);
       alert("Holiday created successfully!");
@@ -31,6 +49,7 @@ export default function CreateHoliday() {
         startDate: "",
         endDate: "",
       });
+      setErrors({});
     } catch (error) {
       console.error("Error creating holiday:", error);
       alert("Failed to create holiday.");
@@ -39,9 +58,9 @@ export default function CreateHoliday() {
 
   return (
     <>
-        <Link to="/profile">
-        <button className="profile-button">Go back to profile page.</button>
-        </Link>
+      <Link to="/profile">
+        <button className="profile-button">Go back to profile page</button>
+      </Link>
       <div className="form-card">
         <form onSubmit={handleSubmit}>
           <div>
@@ -88,6 +107,7 @@ export default function CreateHoliday() {
               required
             />
           </div>
+          {errors.date && <p className="error">{errors.date}</p>}
           <button type="submit">Submit</button>
         </form>
       </div>

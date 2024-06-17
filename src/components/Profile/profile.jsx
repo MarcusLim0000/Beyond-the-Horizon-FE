@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteHoliday, getHoliday, updateHoliday } from "../../utilities/users-api";
-import "./Profile.css"
+import "./Profile.css";
 
 export default function Profile({ user }) {
   const [holidays, setHolidays] = useState([]);
   const [editingHoliday, setEditingHoliday] = useState(null); // State to manage the holiday being edited
+  const [errors, setErrors] = useState({}); // State to manage validation errors
   const token = localStorage.getItem("token");
 
   async function fetchHolidays() {
@@ -37,10 +38,15 @@ export default function Profile({ user }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    if (editingHoliday.startDate > editingHoliday.endDate) {
+      setErrors({ date: "End date cannot be earlier than start date." });
+      return;
+    }
     try {
       await updateHoliday(editingHoliday._id, editingHoliday);
       setEditingHoliday(null); // Reset editing state after updating
       fetchHolidays(); // Refresh holidays list
+      setErrors({});
     } catch (error) {
       console.error('Error updating holiday:', error);
     }
@@ -48,10 +54,20 @@ export default function Profile({ user }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditingHoliday({
-      ...editingHoliday,
-      [name]: value,
-    });
+    const updatedHoliday = { ...editingHoliday, [name]: value };
+
+    setEditingHoliday(updatedHoliday);
+
+    // Custom validation for dates
+    if (name === "startDate" || name === "endDate") {
+      const newErrors = { ...errors };
+      if (updatedHoliday.startDate && updatedHoliday.endDate && updatedHoliday.startDate > updatedHoliday.endDate) {
+        newErrors.date = "End date cannot be earlier than start date.";
+      } else {
+        delete newErrors.date;
+      }
+      setErrors(newErrors);
+    }
   };
 
   const formatDate = (dateString) => {
@@ -108,6 +124,7 @@ export default function Profile({ user }) {
               required
             />
           </div>
+          {errors.date && <p className="error">{errors.date}</p>}
           <button type="submit">Submit</button>
           <button type="button" onClick={() => setEditingHoliday(null)}>Cancel</button>
         </form>

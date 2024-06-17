@@ -25,6 +25,10 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'cost' && value < 0) {
+      alert('Cost cannot be negative');
+      return;
+    }
     setFormData({
       ...formData,
       [name]: value,
@@ -64,6 +68,7 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
           name="flightNumber"
           value={formData.flightNumber}
           onChange={handleChange}
+          min ="0"
           required
         />
       </div>
@@ -108,6 +113,7 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
           name="gate"
           value={formData.gate}
           onChange={handleChange}
+          min = "0"
           required
         />
       </div>
@@ -119,6 +125,7 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
           name="cost"
           value={formData.cost}
           onChange={handleChange}
+          min = "0"
           required
         />
       </div>

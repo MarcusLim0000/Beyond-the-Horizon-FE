@@ -8,6 +8,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.totalCost {
+  padding: 20px 20px 0px 0px;;
+}
+
 /* Align h3 to the furthest left */
 .holiday-section h3 {
   text-align: left;
@@ -35,7 +39,7 @@
 
 /* Individual cards for flights, hotels, and events */
 .holiday-card, .flight-card, .hotel-card, .event-card {
-  background-color: transparent;
+  background-color: rgb(66, 173, 180);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

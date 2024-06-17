@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { convertCurrency } from '../../utilities/currency-services';
-import "./currencyCon.css"
+import "./currencyCon.css";
 
 export default function CurrencyConverter() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ export default function CurrencyConverter() {
   });
   const [conversionResult, setConversionResult] = useState(null);
   const [convertedAmount, setConvertedAmount] = useState(null);
+
+  const currencies = ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "IDR", "CNY", "NZD", "SGD", "MYR", "THB", "RUB", "CHF", "PHP"];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,27 +50,37 @@ export default function CurrencyConverter() {
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="yourCurrency">Your Currency:</label>
-            <input
-              type="text"
+            <select
               id="yourCurrency"
               name="yourCurrency"
               value={formData.yourCurrency}
               onChange={handleChange}
-              placeholder="Enter your currency"
               required
-            />
+            >
+              <option value="">Select your currency</option>
+              {currencies.map((currency) => (
+                <option key={currency} value={currency}>
+                  {currency}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label htmlFor="targetCurrency">Target Currency:</label>
-            <input
-              type="text"
+            <select
               id="targetCurrency"
               name="targetCurrency"
               value={formData.targetCurrency}
               onChange={handleChange}
-              placeholder="Enter target currency"
               required
-            />
+            >
+              <option value="">Select target currency</option>
+              {currencies.map((currency) => (
+                <option key={currency} value={currency}>
+                  {currency}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label htmlFor="amount">Amount to Convert:</label>
@@ -79,6 +91,7 @@ export default function CurrencyConverter() {
               value={formData.amount}
               onChange={handleChange}
               placeholder="Enter the amount"
+              min="0"
               required
             />
           </div>
@@ -88,7 +101,7 @@ export default function CurrencyConverter() {
           <div className='result'>
             <h3>Conversion Result:</h3>
             <p>Rate: {conversionResult.data.toFixed(2)}</p>
-            <p>Converted Amount: $ {convertedAmount}</p>
+            <p>Converted Amount: {convertedAmount} {formData.targetCurrency}</p>
           </div>
         )}
       </div>
