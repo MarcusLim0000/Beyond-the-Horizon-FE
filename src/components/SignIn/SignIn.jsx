@@ -2,7 +2,7 @@ import "./SignIn.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as usersService from "../../utilities/user-services";
-import "./SignIn.css"
+import "./SignIn.css";
 
 function SignIn({ setUser, user }) {
   const [state, setState] = useState({

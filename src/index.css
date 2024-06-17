@@ -4,8 +4,9 @@
   box-sizing: border-box;
 }
 
-/* Ensure full height and center content */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
 }
@@ -14,7 +15,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #f4f4f9;
 }
 

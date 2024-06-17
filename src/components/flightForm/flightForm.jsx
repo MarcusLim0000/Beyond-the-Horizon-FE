@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { createFlight, updateFlight } from '../../utilities/users-api';
+import React, { useState, useEffect } from "react";
+import { createFlight, updateFlight } from "../../utilities/users-api";
 
 export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
   const [formData, setFormData] = useState({
     holidayId: holidayId,
-    flightNumber: '',
-    date: '',
-    time: '',
-    airport: '',
-    gate: '',
-    cost: '',
-    ...initialData, // Pre-fill form with initial data if available
+    flightNumber: "",
+    date: "",
+    time: "",
+    airport: "",
+    gate: "",
+    cost: "",
+    ...initialData,
   });
 
   useEffect(() => {
     if (initialData.date) {
-      const date = new Date(initialData.date).toISOString().split('T')[0];
-      setFormData(prevState => ({
+      const date = new Date(initialData.date).toISOString().split("T")[0];
+      setFormData((prevState) => ({
         ...prevState,
         date,
       }));
@@ -25,8 +25,8 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'cost' && value < 0) {
-      alert('Cost cannot be negative');
+    if (name === "cost" && value < 0) {
+      alert("Cost cannot be negative");
       return;
     }
     setFormData({
@@ -46,15 +46,15 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
       onSubmit(formData);
       setFormData({
         holidayId: holidayId,
-        flightNumber: '',
-        date: '',
-        time: '',
-        airport: '',
-        gate: '',
-        cost: '',
+        flightNumber: "",
+        date: "",
+        time: "",
+        airport: "",
+        gate: "",
+        cost: "",
       });
     } catch (error) {
-      console.error('Error creating flight:', error);
+      console.error("Error creating flight:", error);
     }
   }
 
@@ -68,7 +68,7 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
           name="flightNumber"
           value={formData.flightNumber}
           onChange={handleChange}
-          min ="0"
+          min="0"
           required
         />
       </div>
@@ -113,7 +113,7 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
           name="gate"
           value={formData.gate}
           onChange={handleChange}
-          min = "0"
+          min="0"
           required
         />
       </div>
@@ -125,7 +125,8 @@ export default function FlightForm({ holidayId, initialData = {}, onSubmit }) {
           name="cost"
           value={formData.cost}
           onChange={handleChange}
-          min = "0"
+          min="0"
+          step="0.01"
           required
         />
       </div>

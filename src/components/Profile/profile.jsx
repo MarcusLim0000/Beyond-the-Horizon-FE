@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { deleteHoliday, getHoliday, updateHoliday } from "../../utilities/users-api";
+import {
+  deleteHoliday,
+  getHoliday,
+  updateHoliday,
+} from "../../utilities/users-api";
 import "./Profile.css";
 
 export default function Profile({ user }) {
   const [holidays, setHolidays] = useState([]);
-  const [editingHoliday, setEditingHoliday] = useState(null); // State to manage the holiday being edited
-  const [errors, setErrors] = useState({}); // State to manage validation errors
+  const [editingHoliday, setEditingHoliday] = useState(null);
+  const [errors, setErrors] = useState({});
   const token = localStorage.getItem("token");
 
   async function fetchHolidays() {
@@ -44,11 +48,11 @@ export default function Profile({ user }) {
     }
     try {
       await updateHoliday(editingHoliday._id, editingHoliday);
-      setEditingHoliday(null); // Reset editing state after updating
-      fetchHolidays(); // Refresh holidays list
+      setEditingHoliday(null);
+      fetchHolidays();
       setErrors({});
     } catch (error) {
-      console.error('Error updating holiday:', error);
+      console.error("Error updating holiday:", error);
     }
   }
 
@@ -58,10 +62,13 @@ export default function Profile({ user }) {
 
     setEditingHoliday(updatedHoliday);
 
-    // Custom validation for dates
     if (name === "startDate" || name === "endDate") {
       const newErrors = { ...errors };
-      if (updatedHoliday.startDate && updatedHoliday.endDate && updatedHoliday.startDate > updatedHoliday.endDate) {
+      if (
+        updatedHoliday.startDate &&
+        updatedHoliday.endDate &&
+        updatedHoliday.startDate > updatedHoliday.endDate
+      ) {
         newErrors.date = "End date cannot be earlier than start date.";
       } else {
         delete newErrors.date;
@@ -71,7 +78,7 @@ export default function Profile({ user }) {
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toISOString().split('T')[0];
+    return new Date(dateString).toISOString().split("T")[0];
   };
 
   return (
@@ -126,7 +133,9 @@ export default function Profile({ user }) {
           </div>
           {errors.date && <p className="error">{errors.date}</p>}
           <button type="submit">Submit</button>
-          <button type="button" onClick={() => setEditingHoliday(null)}>Cancel</button>
+          <button type="button" onClick={() => setEditingHoliday(null)}>
+            Cancel
+          </button>
         </form>
       ) : (
         <div className="holidays-container">
@@ -138,7 +147,9 @@ export default function Profile({ user }) {
                 <p>
                   Start Date: {new Date(holiday.startDate).toLocaleDateString()}
                 </p>
-                <p>End Date: {new Date(holiday.endDate).toLocaleDateString()}</p>
+                <p>
+                  End Date: {new Date(holiday.endDate).toLocaleDateString()}
+                </p>
                 <button
                   onClick={() => {
                     handleDelete(holiday._id);
@@ -146,11 +157,17 @@ export default function Profile({ user }) {
                 >
                   Delete
                 </button>
-                <button onClick={() => setEditingHoliday({
-                  ...holiday,
-                  startDate: formatDate(holiday.startDate),
-                  endDate: formatDate(holiday.endDate)
-                })}>Edit</button>
+                <button
+                  onClick={() =>
+                    setEditingHoliday({
+                      ...holiday,
+                      startDate: formatDate(holiday.startDate),
+                      endDate: formatDate(holiday.endDate),
+                    })
+                  }
+                >
+                  Edit
+                </button>
                 <Link to={`/details/${holiday._id}`}>
                   <button>Details</button>
                 </Link>

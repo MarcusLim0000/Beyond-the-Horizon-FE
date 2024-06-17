@@ -1,4 +1,4 @@
-const API_URL = 'https://api.apyhub.com/data/convert/currency';
+const API_URL = import.meta.env.VITE_API_URL;
 const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 export async function convertCurrency(source, target) {
@@ -8,10 +8,10 @@ export async function convertCurrency(source, target) {
   };
 
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'apy-token': API_TOKEN,
+      "Content-Type": "application/json",
+      "apy-token": API_TOKEN,
     },
     body: JSON.stringify(payload),
   };
@@ -21,10 +21,10 @@ export async function convertCurrency(source, target) {
     if (response.ok) {
       return await response.json();
     } else {
-      throw new Error('Failed to convert currency');
+      throw new Error("Failed to convert currency");
     }
   } catch (error) {
-    console.error('Error converting currency:', error);
+    console.error("Error converting currency:", error);
     throw error;
   }
 }

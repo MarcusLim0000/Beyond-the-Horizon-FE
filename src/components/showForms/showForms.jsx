@@ -13,19 +13,19 @@ import {
   handleUpdateFlight,
   handleUpdateHotel,
   handleUpdateEvent,
-} from "../../utilities/form-services"; // Ensure the correct path to your form-services file
-import "./showForms.css"; // Import the CSS file here
+} from "../../utilities/form-services";
+import "./showForms.css";
 
 export default function ShowForms() {
-  const { holidayId } = useParams(); // Retrieve the holidayId from URL params
+  const { holidayId } = useParams();
   const [showHotelForm, setShowHotelForm] = useState(false);
   const [showFlightForm, setShowFlightForm] = useState(false);
   const [showEventForm, setShowEventForm] = useState(false);
   const [flights, setFlights] = useState([]);
   const [hotels, setHotels] = useState([]);
   const [events, setEvents] = useState([]);
-  const [refresh, setRefresh] = useState(false); // State to trigger re-fetching
-  const [editMode, setEditMode] = useState({ type: null, item: null }); // State to track edit mode
+  const [refresh, setRefresh] = useState(false);
+  const [editMode, setEditMode] = useState({ type: null, item: null });
 
   const handleHotelClick = () => setShowHotelForm(!showHotelForm);
   const handleFlightClick = () => setShowFlightForm(!showFlightForm);
@@ -43,10 +43,10 @@ export default function ShowForms() {
         .then((eventData) => setEvents(eventData))
         .catch((error) => console.error("Error fetching events:", error));
     }
-  }, [holidayId, refresh]); // Add refresh to dependency array
+  }, [holidayId, refresh]);
 
   function handleRefresh() {
-    setRefresh((prev) => !prev); // Toggle refresh state
+    setRefresh((prev) => !prev);
   }
 
   function handleEdit(item, type) {
@@ -70,9 +70,18 @@ export default function ShowForms() {
   }
 
   function calculateTotalCost() {
-    const flightCosts = flights.reduce((total, flight) => total + (parseFloat(flight.cost) || 0), 0);
-    const hotelCosts = hotels.reduce((total, hotel) => total + (parseFloat(hotel.cost) || 0), 0);
-    const eventCosts = events.reduce((total, event) => total + (parseFloat(event.cost) || 0), 0);
+    const flightCosts = flights.reduce(
+      (total, flight) => total + (parseFloat(flight.cost) || 0),
+      0
+    );
+    const hotelCosts = hotels.reduce(
+      (total, hotel) => total + (parseFloat(hotel.cost) || 0),
+      0
+    );
+    const eventCosts = events.reduce(
+      (total, event) => total + (parseFloat(event.cost) || 0),
+      0
+    );
 
     return flightCosts + hotelCosts + eventCosts;
   }
@@ -86,22 +95,28 @@ export default function ShowForms() {
       </nav>
       <h2>Here is your itinerary</h2>
       <div className="totalCost">
-         <p>Total cost: ${totalCost.toFixed(2)}</p>
+        <p>Total cost: ${totalCost.toFixed(2)}</p>
       </div>
       <div className="form-card">
-        <button className="add-button" onClick={handleFlightClick}>Add a flight here</button>
+        <button className="add-button" onClick={handleFlightClick}>
+          Add a flight here
+        </button>
         {showFlightForm && (
           <FlightForm holidayId={holidayId} onSubmit={handleRefresh} />
         )}
       </div>
       <div className="form-card">
-        <button className="add-button" onClick={handleHotelClick}>Add your lodgings here</button>
+        <button className="add-button" onClick={handleHotelClick}>
+          Add your lodgings here
+        </button>
         {showHotelForm && (
           <HotelForm holidayId={holidayId} onSubmit={handleRefresh} />
         )}
       </div>
       <div className="form-card">
-        <button className="add-button" onClick={handleEventClick}>Add an event here</button>
+        <button className="add-button" onClick={handleEventClick}>
+          Add an event here
+        </button>
         {showEventForm && (
           <EventForm holidayId={holidayId} onSubmit={handleRefresh} />
         )}
@@ -119,9 +134,13 @@ export default function ShowForms() {
                 <p>Gate: {flight.gate}</p>
                 <p>Cost: {flight.cost}</p>
                 <div className="button-container">
-                  <button onClick={() => handleEdit(flight, "flight")}>Edit</button>
+                  <button onClick={() => handleEdit(flight, "flight")}>
+                    Edit
+                  </button>
                   <button
-                    onClick={() => handleDeleteFlight(flight._id).then(handleRefresh)}
+                    onClick={() =>
+                      handleDeleteFlight(flight._id).then(handleRefresh)
+                    }
                   >
                     Delete
                   </button>
@@ -143,18 +162,24 @@ export default function ShowForms() {
                 <p>Address: {hotel.address}</p>
                 <p>Rooms: {hotel.rooms}</p>
                 <p>
-                  Check-In Date: {new Date(hotel.checkInDate).toLocaleDateString()}
+                  Check-In Date:{" "}
+                  {new Date(hotel.checkInDate).toLocaleDateString()}
                 </p>
                 <p>Check-In Time: {hotel.checkInTime}</p>
                 <p>
-                  Check-Out Date: {new Date(hotel.checkOutDate).toLocaleDateString()}
+                  Check-Out Date:{" "}
+                  {new Date(hotel.checkOutDate).toLocaleDateString()}
                 </p>
                 <p>Check-Out Time: {hotel.checkOutTime}</p>
                 <p>Cost: {hotel.cost}</p>
                 <div className="button-container">
-                  <button onClick={() => handleEdit(hotel, "hotel")}>Edit</button>
+                  <button onClick={() => handleEdit(hotel, "hotel")}>
+                    Edit
+                  </button>
                   <button
-                    onClick={() => handleDeleteHotel(hotel._id).then(handleRefresh)}
+                    onClick={() =>
+                      handleDeleteHotel(hotel._id).then(handleRefresh)
+                    }
                   >
                     Delete
                   </button>
@@ -179,9 +204,13 @@ export default function ShowForms() {
                 <p>End Time: {event.endTime}</p>
                 <p>Cost: {event.cost}</p>
                 <div className="button-container">
-                  <button onClick={() => handleEdit(event, "event")}>Edit</button>
+                  <button onClick={() => handleEdit(event, "event")}>
+                    Edit
+                  </button>
                   <button
-                    onClick={() => handleDeleteEvent(event._id).then(handleRefresh)}
+                    onClick={() =>
+                      handleDeleteEvent(event._id).then(handleRefresh)
+                    }
                   >
                     Delete
                   </button>
