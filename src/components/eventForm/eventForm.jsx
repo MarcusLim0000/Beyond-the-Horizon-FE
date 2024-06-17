@@ -12,6 +12,7 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
     cost: '',
     ...initialData,
   });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (initialData.date) {
@@ -25,18 +26,39 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const updatedFormData = { ...formData, [name]: value };
+
+    // Validate times
+    if (name === 'startTime' || name === 'endTime') {
+      const newErrors = { ...errors };
+      const startTime = new Date(formData.date + 'T' + (name === 'startTime' ? value : formData.startTime));
+      const endTime = new Date(formData.date + 'T' + (name === 'endTime' ? value : formData.endTime));
+
+      if (startTime > endTime) {
+        newErrors.time = "End time cannot be earlier than start time.";
+      } else {
+        delete newErrors.time;
+      }
+      setErrors(newErrors);
+    }
+
     if (name === 'cost' && value < 0) {
       alert('Cost cannot be negative');
       return;
     }
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    setFormData(updatedFormData);
   };
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    // Final validation check before submission
+    const startTime = new Date(formData.date + 'T' + formData.startTime);
+    const endTime = new Date(formData.date + 'T' + formData.endTime);
+    if (startTime > endTime) {
+      setErrors({ time: "End time cannot be earlier than start time." });
+      return;
+    }
     try {
       if (initialData._id) {
         await updateEvent(initialData._id, formData);
@@ -53,6 +75,7 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
         endTime: '',
         cost: '',
       });
+      setErrors({});
     } catch (error) {
       console.error('Error creating event:', error);
       alert('Failed to create event.');
@@ -116,6 +139,7 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
           required
         />
       </div>
+      {errors.time && <p className="error">{errors.time}</p>}
       <div>
         <label htmlFor="cost">Cost:</label>
         <input
@@ -125,6 +149,7 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
           value={formData.cost}
           step="0.01"
           onChange={handleChange}
+          min="0"
           required
         />
       </div>

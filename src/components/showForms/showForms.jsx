@@ -69,12 +69,25 @@ export default function ShowForms() {
     }
   }
 
+  function calculateTotalCost() {
+    const flightCosts = flights.reduce((total, flight) => total + (parseFloat(flight.cost) || 0), 0);
+    const hotelCosts = hotels.reduce((total, hotel) => total + (parseFloat(hotel.cost) || 0), 0);
+    const eventCosts = events.reduce((total, event) => total + (parseFloat(event.cost) || 0), 0);
+
+    return flightCosts + hotelCosts + eventCosts;
+  }
+
+  const totalCost = calculateTotalCost();
+
   return (
     <div className="main-body">
       <nav>
         <Link to="/profile">Go back to profile page</Link>
       </nav>
       <h2>Here is your itinerary</h2>
+      <div className="totalCost">
+         <p>Total cost: ${totalCost.toFixed(2)}</p>
+      </div>
       <div className="form-card">
         <button className="add-button" onClick={handleFlightClick}>Add a flight here</button>
         {showFlightForm && (
