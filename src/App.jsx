@@ -9,6 +9,7 @@ import Profile from "./components/Profile/profile";
 import CreateHoliday from "./components/createHoliday/createHoliday";
 import ShowForms from "./components/showForms/showForms";
 import CurrencyConverter from "./components/currencyCon/currencyCon";
+import ImageUpload from "./components/imageUpload/imageUpload";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -76,6 +77,11 @@ function App() {
             exact
             path="/currency-converter"
             element={<CurrencyConverter />}
+          />
+          <Route
+            exact
+            path="/image-upload/:holidayId"
+            element={<ImageUpload />}
           />
         </Routes>
       </main>
