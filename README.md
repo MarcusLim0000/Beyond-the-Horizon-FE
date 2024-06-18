@@ -11,12 +11,13 @@ Hotel Management: Users can add, view, edit, and delete hotel details for each h
 Flight Management: Users can add, view, edit, and delete flight details for each holiday.
 Event Management: Users can add, view, edit, and delete event details for each holiday.
 Currency Converter: Users can convert currency values directly within the application.
+Image Upload: Users can upload pictures that they have taken on their holidays directly into the application.
 
 Technologies Used
 
 Frontend: React, React Router
 Backend: Node.js, Express
-Database: MongoDB
+Database: MongoDB, Cloudinary
 Authentication: JWT (JSON Web Token)
 Styling: CSS
 Utilities: date-fns (for date formatting), Fetch API (for API requests)
@@ -25,6 +26,8 @@ Prerequisites
 Node.js
 npm (Node Package Manager)
 MongoDB
+
+
 Steps
 
 Install Dependencies:
@@ -38,14 +41,19 @@ Set Up Environment Variables:
 Create a .env file in the root directory of your backend and add the following environment variables:
 
 env:
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-PORT=5000
+DATABASE_URL=(MongoDB URL here)
+PORT=(PORT number)
+SECRET=(JWT secret)
+CLOUDINARY_CLOUD_NAME=d(Cloudinary database name)
+CLOUDINARY_API_KEY=(Cloudinary API key)
+CLOUDINARY_SECRET_KEY=(Cloudinary secret key)
 
 Create a env file in the client directory of your frontend and add the following environment variable:
 
 Please first obtain an API key from Currency Converter API @ https://apyhub.com/utility/currency-conversion
+
 Copy and paste your API key into the .env file of this frontend application using the VITE_API_TOKEN=(your api key here) prefix.
+
 VITE_API_TOKEN=(API token from apyhub or external currency api)
 VITE_API_URL=(API url here)
 VITE_BASE_URL=(base backend url here)

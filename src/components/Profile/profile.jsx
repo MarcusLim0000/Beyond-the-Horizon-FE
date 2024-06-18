@@ -171,6 +171,9 @@ export default function Profile({ user }) {
                 <Link to={`/details/${holiday._id}`}>
                   <button>Details</button>
                 </Link>
+                <Link to={`/image-upload/${holiday._id}`}>
+                  <button>Hall of memories</button>
+                </Link>
               </div>
             ))
           ) : (
