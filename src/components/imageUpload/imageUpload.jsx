@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./imageUpload.css";
 
@@ -8,6 +8,7 @@ export default function ImageUpload() {
   const [files, setFiles] = useState([]);
   const [images, setImages] = useState([]);
   const token = localStorage.getItem("token");
+  const fileInputRef = useRef(null);
 
   const BACKEND_URL = import.meta.env.VITE_BASE_URL;
 
@@ -55,6 +56,10 @@ export default function ImageUpload() {
       );
       alert("Upload successful!");
       fetchImages();
+      setFiles([]);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } catch (error) {
       console.error("Error uploading the files:", error);
       alert("Failed to upload the files. Please try again.");
@@ -87,6 +92,7 @@ export default function ImageUpload() {
           multiple
           onChange={(e) => setFiles(Array.from(e.target.files))}
           className="file-input"
+          ref={fileInputRef}
         />
         <button onClick={handleUpload} className="upload-button">
           Upload memories
