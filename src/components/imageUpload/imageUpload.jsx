@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./imageUpload.css";
 
-function ImageUpload() {
+export default function ImageUpload() {
   const { holidayId } = useParams();
   const [files, setFiles] = useState([]);
   const [images, setImages] = useState([]);
   const token = localStorage.getItem("token");
 
-  const BACKEND_URL = import.meta.env.VITE_BASE_URL
+  const BACKEND_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     fetchImages();
@@ -61,6 +61,21 @@ function ImageUpload() {
     }
   }
 
+  async function handleDeleteImage(imageId) {
+    try {
+      await axios.delete(`${BACKEND_URL}/api/upload/${imageId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert("Image deleted successfully!");
+      fetchImages();
+    } catch (error) {
+      console.error("Error deleting the image:", error);
+      alert("Failed to delete the image. Please try again.");
+    }
+  }
+
   return (
     <div className="image-upload-container">
       <div className="input-section">
@@ -85,11 +100,14 @@ function ImageUpload() {
               alt={`Uploaded ${index}`}
               className="uploaded-image"
             />
+            <div className="image-delete">
+              <button onClick={() => handleDeleteImage(image._id)}>
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
 }
-
-export default ImageUpload;

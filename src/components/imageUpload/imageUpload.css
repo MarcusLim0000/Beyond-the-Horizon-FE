@@ -47,6 +47,7 @@
 }
 
 .image-container {
+  position: relative;
   padding: 10px;
   background-color: lightgray;
   border-radius: 10px;
@@ -58,4 +59,18 @@
   max-height: 300px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.image-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+}
+
+.image-container:hover .image-delete {
+  opacity: 1;
+  transform: translateY(0);
 }
