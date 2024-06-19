@@ -21,6 +21,19 @@ function SignUp() {
       return;
     }
 
+    if (state.password) {
+      const password = state.password;
+      const strongPasswordRegex =
+        /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+      if (!strongPasswordRegex.test(password)) {
+        alert(
+          "Please use a stronger password that includes special characters, numbers, and a minimum of 8 characters"
+        );
+        return;
+      }
+    }
+
     const { confirmPassword, ...userData } = state;
 
     try {
