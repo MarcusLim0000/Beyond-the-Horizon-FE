@@ -1,3 +1,4 @@
+![img can't be displayed](/assets/logo.jpg)
 Holiday Planner
 
 Overview
