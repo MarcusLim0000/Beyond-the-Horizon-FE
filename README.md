@@ -1,4 +1,4 @@
-![img can't be displayed](../assets/logo.jpg)
+![img can't be displayed](src/assets/logo.jpg)
 
 
 **Holiday Planner**
