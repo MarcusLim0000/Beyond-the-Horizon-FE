@@ -1,7 +1,9 @@
-![img can't be displayed](/assets/logo.jpg)
-Holiday Planner
+![img can't be displayed](../assets/logo.jpg)
 
-Overview
+
+**Holiday Planner**
+
+**Overview**
 
 The Holiday Planner is a web application designed to help users plan and manage their holidays. Users can create, view, edit, and delete holiday plans, as well as add details for hotels, flights, and events associated with each holiday.
 
@@ -14,7 +16,7 @@ Event Management: Users can add, view, edit, and delete event details for each h
 Currency Converter: Users can convert currency values directly within the application.
 Image Upload: Users can upload pictures that they have taken on their holidays directly into the application.
 
-Technologies Used
+**Technologies Used**
 
 Frontend: React, React Router
 Backend: Node.js, Express
@@ -29,7 +31,7 @@ npm (Node Package Manager)
 MongoDB
 
 
-Steps
+**Steps to run the repo**
 
 Install Dependencies:
 
@@ -60,11 +62,12 @@ VITE_API_URL=(API url here)
 VITE_BASE_URL=(base backend url here)
 
 
-Usage
+**Usage**
+
 Sign Up and Log In:
 
 Navigate to the sign-up page to create a new account.
-After signing up, log in with your credentials.
+After signing up, click on the sign in button to log in with your credentials.
 
 Manage Holidays:
 
@@ -81,8 +84,9 @@ Ensure that the end time is not earlier than the start time for events.
 Convert Currency:
 
 Use the currency converter to convert values between different currencies.
+Maximum of 5 conversions a day.
 
-Acknowledgements:
+**Acknowledgements:**
 
 date-fns for date formatting and manipulation.
 React for building the user interface.
