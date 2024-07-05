@@ -1,11 +1,11 @@
 ![img can't be displayed](src/assets/logo.jpg)
 
 
-**Beyond the Horizon**
+<h1>**Beyond the Horizon**</h1>
 
 **Overview**
 
-<h1>Beyond the Horizon is a holiday planning web application designed to help users plan and manage their holidays. Users can create, view, edit, and delete holiday plans, as well as add details for hotels, flights, and events associated with each holiday.</h1>
+<p>Beyond the Horizon is a holiday planning web application designed to help users plan and manage their holidays. Users can create, view, edit, and delete holiday plans, as well as add details for hotels, flights, and events associated with each holiday.</p>
 
 Features:
 User Authentication: Users can sign up, log in, and log out.
