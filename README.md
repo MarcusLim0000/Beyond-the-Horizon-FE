@@ -1,11 +1,11 @@
 ![img can't be displayed](src/assets/logo.jpg)
 
 
-**Holiday Planner**
+**Beyond the Horizon**
 
 **Overview**
 
-The Holiday Planner is a web application designed to help users plan and manage their holidays. Users can create, view, edit, and delete holiday plans, as well as add details for hotels, flights, and events associated with each holiday.
+<h1>Beyond the Horizon is a holiday planning web application designed to help users plan and manage their holidays. Users can create, view, edit, and delete holiday plans, as well as add details for hotels, flights, and events associated with each holiday.</h1>
 
 Features:
 User Authentication: Users can sign up, log in, and log out.
@@ -15,6 +15,8 @@ Flight Management: Users can add, view, edit, and delete flight details for each
 Event Management: Users can add, view, edit, and delete event details for each holiday.
 Currency Converter: Users can convert currency values directly within the application.
 Image Upload: Users can upload pictures that they have taken on their holidays directly into the application.
+
+Have a look at the front end <a href="https://beyond-the-horizon-fe.vercel.app/">HERE!</a>
 
 **Technologies Used**
 
