@@ -97,7 +97,14 @@ Maximum of 5 conversions a day.
 
 **Acknowledgements:**
 
+Front end is hosted by Vercel
+
+Back end is hosted By Render
+
 date-fns for date formatting and manipulation.
+
 React for building the user interface.
+
 Node.js and Express for the backend server.
+
 MongoDB for the database.
