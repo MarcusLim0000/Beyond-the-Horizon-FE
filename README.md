@@ -9,7 +9,7 @@
 
 **Features**
 
-User Authentication: Users can sign up, log in, and log out.
+<p>User Authentication: Users can sign up, log in, and log out.</p>
 Holiday Management: Users can create, view, edit, and delete holiday plans.
 Hotel Management: Users can add, view, edit, and delete hotel details for each holiday.
 Flight Management: Users can add, view, edit, and delete flight details for each holiday.
