@@ -7,7 +7,8 @@
 
 <p>Beyond the Horizon is a holiday planning web application designed to help users plan and manage their holidays. Users can create, view, edit, and delete holiday plans, as well as add details for hotels, flights, and events associated with each holiday.</p>
 
-Features:
+**Features**
+
 User Authentication: Users can sign up, log in, and log out.
 Holiday Management: Users can create, view, edit, and delete holiday plans.
 Hotel Management: Users can add, view, edit, and delete hotel details for each holiday.
