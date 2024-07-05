@@ -1,7 +1,7 @@
 ![img can't be displayed](src/assets/logo.jpg)
 
 
-<h1>**Beyond the Horizon**</h1>
+<h1>Beyond the Horizon</h1>
 
 **Overview**
 
