@@ -9,12 +9,18 @@
 
 **Features**
 
-<p>User Authentication: Users can sign up, log in, and log out.</p>
+User Authentication: Users can sign up, log in, and log out.
+
 Holiday Management: Users can create, view, edit, and delete holiday plans.
+
 Hotel Management: Users can add, view, edit, and delete hotel details for each holiday.
+
 Flight Management: Users can add, view, edit, and delete flight details for each holiday.
+
 Event Management: Users can add, view, edit, and delete event details for each holiday.
+
 Currency Converter: Users can convert currency values directly within the application.
+
 Image Upload: Users can upload pictures that they have taken on their holidays directly into the application.
 
 Have a look at the front end <a href="https://beyond-the-horizon-fe.vercel.app/">HERE!</a>
