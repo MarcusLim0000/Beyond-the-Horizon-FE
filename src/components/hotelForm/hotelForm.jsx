@@ -119,31 +119,33 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Hotel Name:</label>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div className="mb-4">
+        <label htmlFor="name" className="block text-sm font-bold mb-2">Hotel Name:</label>
         <input
           type="text"
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="address">Address:</label>
+      <div className="mb-4">
+        <label htmlFor="address" className="block text-sm font-bold mb-2">Address:</label>
         <input
           type="text"
           id="address"
           name="address"
           value={formData.address}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="rooms">Rooms:</label>
+      <div className="mb-4">
+        <label htmlFor="rooms" className="block text-sm font-bold mb-2">Rooms:</label>
         <input
           type="number"
           id="rooms"
@@ -151,56 +153,61 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
           value={formData.rooms}
           onChange={handleChange}
           min="1"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="checkInDate">Check-In Date:</label>
+      <div className="mb-4">
+        <label htmlFor="checkInDate" className="block text-sm font-bold mb-2">Check-In Date:</label>
         <input
           type="date"
           id="checkInDate"
           name="checkInDate"
           value={formData.checkInDate}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="checkInTime">Check-In Time:</label>
+      <div className="mb-4">
+        <label htmlFor="checkInTime" className="block text-sm font-bold mb-2">Check-In Time:</label>
         <input
           type="time"
           id="checkInTime"
           name="checkInTime"
           value={formData.checkInTime}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="checkOutDate">Check-Out Date:</label>
+      <div className="mb-4">
+        <label htmlFor="checkOutDate" className="block text-sm font-bold mb-2">Check-Out Date:</label>
         <input
           type="date"
           id="checkOutDate"
           name="checkOutDate"
           value={formData.checkOutDate}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="checkOutTime">Check-Out Time:</label>
+      <div className="mb-4">
+        <label htmlFor="checkOutTime" className="block text-sm font-bold mb-2">Check-Out Time:</label>
         <input
           type="time"
           id="checkOutTime"
           name="checkOutTime"
           value={formData.checkOutTime}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      {errors.date && <p className="error">{errors.date}</p>}
-      <div>
-        <label htmlFor="cost">Cost:</label>
+      {errors?.date && <p className="text-red-500">{errors.date}</p>}
+      <div className="mb-4">
+        <label htmlFor="cost" className="block text-sm font-bold mb-2">Cost:</label>
         <input
           type="number"
           id="cost"
@@ -209,10 +216,13 @@ export default function HotelForm({ holidayId, initialData = {}, onSubmit }) {
           step="0.01"
           onChange={handleChange}
           min="0"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700">
+        Submit
+      </button>
     </form>
   );
 }

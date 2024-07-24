@@ -14,7 +14,6 @@ import {
   handleUpdateHotel,
   handleUpdateEvent,
 } from "../../utilities/form-services";
-import "./showForms.css";
 
 export default function ShowForms() {
   const { holidayId } = useParams();
@@ -89,161 +88,201 @@ export default function ShowForms() {
   const totalCost = calculateTotalCost();
 
   return (
-    <div className="main-body">
-      <nav>
-        <Link to="/profile">Go back to profile page</Link>
-      </nav>
-      <h2>Here is your itinerary</h2>
-      <div className="totalCost">
-        <p>Total cost: ${totalCost.toFixed(2)}</p>
+    <>
+      <div className="flex justify-center">
+        <Link to="/profile">
+          <button className="py-2 px-4 bg-black text-white font-bold rounded-full hover:bg-red-600 mt-5 mb-10">
+            Go back to your profile
+          </button>
+        </Link>
       </div>
-      <div className="form-card">
-        <button className="add-button" onClick={handleFlightClick}>
-          Add a flight here
-        </button>
-        {showFlightForm && (
-          <FlightForm holidayId={holidayId} onSubmit={handleRefresh} />
-        )}
-      </div>
-      <div className="form-card">
-        <button className="add-button" onClick={handleHotelClick}>
-          Add your lodgings here
-        </button>
-        {showHotelForm && (
-          <HotelForm holidayId={holidayId} onSubmit={handleRefresh} />
-        )}
-      </div>
-      <div className="form-card">
-        <button className="add-button" onClick={handleEventClick}>
-          Add an event here
-        </button>
-        {showEventForm && (
-          <EventForm holidayId={holidayId} onSubmit={handleRefresh} />
-        )}
-      </div>
-      <div className="holiday-section">
-        <h3>Existing Flights</h3>
-        <div className="holidays-container">
-          {flights.length > 0 ? (
-            flights.map((flight) => (
-              <div key={flight._id} className="flight-card">
-                <h4>Flight Number: {flight.flightNumber}</h4>
-                <p>Date: {new Date(flight.date).toLocaleDateString()}</p>
-                <p>Time: {flight.time}</p>
-                <p>Airport: {flight.airport}</p>
-                <p>Gate: {flight.gate}</p>
-                <p>Cost: {flight.cost}</p>
-                <div className="button-container">
-                  <button onClick={() => handleEdit(flight, "flight")}>
-                    Edit
-                  </button>
-                  <button
-                    onClick={() =>
-                      handleDeleteFlight(flight._id).then(handleRefresh)
-                    }
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No flights available.</p>
+      <div className="bg-white p-5 max-w-5xl mx-auto my-5 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold mb-5">Here is your itinerary</h2>
+        <div className="p-5 bg-gray-100 rounded-lg mb-5">
+          <p className="text-xl font-bold">
+            Total cost: ${totalCost.toFixed(2)}
+          </p>
+        </div>
+        <div className="bg-white p-5 my-5 rounded-lg shadow-md">
+          <button
+            className="add-button bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+            onClick={handleFlightClick}
+          >
+            Add a flight here
+          </button>
+          {showFlightForm && (
+            <FlightForm holidayId={holidayId} onSubmit={handleRefresh} />
           )}
         </div>
-      </div>
-      <div className="holiday-section">
-        <h3>Existing Hotels</h3>
-        <div className="holidays-container">
-          {hotels.length > 0 ? (
-            hotels.map((hotel) => (
-              <div key={hotel._id} className="hotel-card">
-                <h4>Hotel Name: {hotel.name}</h4>
-                <p>Address: {hotel.address}</p>
-                <p>Rooms: {hotel.rooms}</p>
-                <p>
-                  Check-In Date:{" "}
-                  {new Date(hotel.checkInDate).toLocaleDateString()}
-                </p>
-                <p>Check-In Time: {hotel.checkInTime}</p>
-                <p>
-                  Check-Out Date:{" "}
-                  {new Date(hotel.checkOutDate).toLocaleDateString()}
-                </p>
-                <p>Check-Out Time: {hotel.checkOutTime}</p>
-                <p>Cost: {hotel.cost}</p>
-                <div className="button-container">
-                  <button onClick={() => handleEdit(hotel, "hotel")}>
-                    Edit
-                  </button>
-                  <button
-                    onClick={() =>
-                      handleDeleteHotel(hotel._id).then(handleRefresh)
-                    }
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No lodgings available.</p>
+        <div className="bg-white p-5 my-5 rounded-lg shadow-md">
+          <button
+            className="add-button bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+            onClick={handleHotelClick}
+          >
+            Add your lodgings here
+          </button>
+          {showHotelForm && (
+            <HotelForm holidayId={holidayId} onSubmit={handleRefresh} />
           )}
         </div>
-      </div>
-      <div className="holiday-section">
-        <h3>Existing Events</h3>
-        <div className="holidays-container">
-          {events.length > 0 ? (
-            events.map((event) => (
-              <div key={event._id} className="event-card">
-                <h4>Event Title: {event.title}</h4>
-                <p>Address: {event.address}</p>
-                <p>Date: {new Date(event.date).toLocaleDateString()}</p>
-                <p>Start Time: {event.startTime}</p>
-                <p>End Time: {event.endTime}</p>
-                <p>Cost: {event.cost}</p>
-                <div className="button-container">
-                  <button onClick={() => handleEdit(event, "event")}>
-                    Edit
-                  </button>
-                  <button
-                    onClick={() =>
-                      handleDeleteEvent(event._id).then(handleRefresh)
-                    }
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No events available.</p>
+        <div className="bg-white p-5 my-5 rounded-lg shadow-md">
+          <button
+            className="add-button bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+            onClick={handleEventClick}
+          >
+            Add an event here
+          </button>
+          {showEventForm && (
+            <EventForm holidayId={holidayId} onSubmit={handleRefresh} />
           )}
         </div>
+        <div className="holiday-section flex flex-col gap-5 justify-center mb-5 w-full">
+          <h3 className="text-lg font-bold mb-5">Existing Flights</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {flights.length > 0 ? (
+              flights.map((flight) => (
+                <div
+                  key={flight._id}
+                  className="flight-card bg-teal-500 p-5 rounded-lg shadow-md"
+                >
+                  <h4 className="text-lg font-bold">
+                    Flight Number: {flight.flightNumber}
+                  </h4>
+                  <p>Date: {new Date(flight.date).toLocaleDateString()}</p>
+                  <p>Time: {flight.time}</p>
+                  <p>Airport: {flight.airport}</p>
+                  <p>Gate: {flight.gate}</p>
+                  <p>Cost: {flight.cost}</p>
+                  <div className="flex gap-2 mt-2">
+                    <button
+                      className="bg-yellow-500 text-white py-1 px-2 rounded-lg"
+                      onClick={() => handleEdit(flight, "flight")}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="bg-red-500 text-white py-1 px-2 rounded-lg"
+                      onClick={() =>
+                        handleDeleteFlight(flight._id).then(handleRefresh)
+                      }
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No flights available.</p>
+            )}
+          </div>
+        </div>
+        <div className="holiday-section flex flex-col gap-5 justify-center mb-5 w-full">
+          <h3 className="text-lg font-bold mb-5">Existing Hotels</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {hotels.length > 0 ? (
+              hotels.map((hotel) => (
+                <div
+                  key={hotel._id}
+                  className="hotel-card bg-teal-500 p-5 rounded-lg shadow-md"
+                >
+                  <h4 className="text-lg font-bold">Hotel Name: {hotel.name}</h4>
+                  <p>Address: {hotel.address}</p>
+                  <p>Rooms: {hotel.rooms}</p>
+                  <p>
+                    Check-In Date:{" "}
+                    {new Date(hotel.checkInDate).toLocaleDateString()}
+                  </p>
+                  <p>Check-In Time: {hotel.checkInTime}</p>
+                  <p>
+                    Check-Out Date:{" "}
+                    {new Date(hotel.checkOutDate).toLocaleDateString()}
+                  </p>
+                  <p>Check-Out Time: {hotel.checkOutTime}</p>
+                  <p>Cost: {hotel.cost}</p>
+                  <div className="flex gap-2 mt-2">
+                    <button
+                      className="bg-yellow-500 text-white py-1 px-2 rounded-lg"
+                      onClick={() => handleEdit(hotel, "hotel")}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="bg-red-500 text-white py-1 px-2 rounded-lg"
+                      onClick={() =>
+                        handleDeleteHotel(hotel._id).then(handleRefresh)
+                      }
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No lodgings available.</p>
+            )}
+          </div>
+        </div>
+        <div className="holiday-section flex flex-col gap-5 justify-center mb-5 w-full">
+          <h3 className="text-lg font-bold mb-5">Existing Events</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {events.length > 0 ? (
+              events.map((event) => (
+                <div
+                  key={event._id}
+                  className="event-card bg-teal-500 p-5 rounded-lg shadow-md"
+                >
+                  <h4 className="text-lg font-bold">Event Title: {event.title}</h4>
+                  <p>Address: {event.address}</p>
+                  <p>Date: {new Date(event.date).toLocaleDateString()}</p>
+                  <p>Start Time: {event.startTime}</p>
+                  <p>End Time: {event.endTime}</p>
+                  <p>Cost: {event.cost}</p>
+                  <div className="flex gap-2 mt-2">
+                    <button
+                      className="bg-yellow-500 text-white py-1 px-2 rounded-lg"
+                      onClick={() => handleEdit(event, "event")}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="bg-red-500 text-white py-1 px-2 rounded-lg"
+                      onClick={() =>
+                        handleDeleteEvent(event._id).then(handleRefresh)
+                      }
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No events available.</p>
+            )}
+          </div>
+        </div>
+  
+        {editMode.type === "flight" && (
+          <FlightForm
+            holidayId={holidayId}
+            initialData={editMode.item}
+            onSubmit={(updatedData) => handleUpdate("flight", updatedData)}
+          />
+        )}
+        {editMode.type === "hotel" && (
+          <HotelForm
+            holidayId={holidayId}
+            initialData={editMode.item}
+            onSubmit={(updatedData) => handleUpdate("hotel", updatedData)}
+          />
+        )}
+        {editMode.type === "event" && (
+          <EventForm
+            holidayId={holidayId}
+            initialData={editMode.item}
+            onSubmit={(updatedData) => handleUpdate("event", updatedData)}
+          />
+        )}
       </div>
-
-      {editMode.type === "flight" && (
-        <FlightForm
-          holidayId={holidayId}
-          initialData={editMode.item}
-          onSubmit={(updatedData) => handleUpdate("flight", updatedData)}
-        />
-      )}
-      {editMode.type === "hotel" && (
-        <HotelForm
-          holidayId={holidayId}
-          initialData={editMode.item}
-          onSubmit={(updatedData) => handleUpdate("hotel", updatedData)}
-        />
-      )}
-      {editMode.type === "event" && (
-        <EventForm
-          holidayId={holidayId}
-          initialData={editMode.item}
-          onSubmit={(updatedData) => handleUpdate("event", updatedData)}
-        />
-      )}
-    </div>
+    </>
   );
-}
+}  

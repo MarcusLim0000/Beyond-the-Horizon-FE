@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
-import "./imageUpload.css";
 
 export default function ImageUpload() {
   const { holidayId } = useParams();
@@ -82,32 +81,45 @@ export default function ImageUpload() {
   }
 
   return (
-    <div className="image-upload-container">
-      <div className="input-section">
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex justify-center">
         <Link to="/profile">
-          <button className="back-button">Go back to your profile</button>
+          <button className="py-2 px-4 bg-black text-white font-bold rounded-full hover:bg-red-600 mt-5 mb-10">
+            Go back to your profile
+          </button>
         </Link>
+      </div>
+      <div className="bg-gray-100 rounded-lg p-5 shadow-md">
         <input
           type="file"
           multiple
           onChange={(e) => setFiles(Array.from(e.target.files))}
-          className="file-input"
+          className="file-input mb-4"
           ref={fileInputRef}
         />
-        <button onClick={handleUpload} className="upload-button">
+        <button
+          onClick={handleUpload}
+          className="bg-blue-700 text-white py-2 px-4 rounded-lg"
+        >
           Upload memories
         </button>
       </div>
-      <div className="image-gallery">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
         {images.map((image, index) => (
-          <div key={index} className="image-container">
+          <div
+            key={index}
+            className="relative p-2 bg-gray-300 rounded-lg shadow-md group"
+          >
             <img
               src={image.url}
               alt={`Uploaded ${index}`}
-              className="uploaded-image"
+              className="max-w-lg max-h-lg object-cover rounded-lg"
             />
-            <div className="image-delete">
-              <button onClick={() => handleDeleteImage(image._id)}>
+            <div className="absolute top-2 right-2 opacity-0 transition-opacity duration-300 transform group-hover:opacity-100 group-hover:translate-y-0">
+              <button
+                onClick={() => handleDeleteImage(image._id)}
+                className="bg-red-500 text-white py-1 px-2 rounded-lg"
+              >
                 Delete
               </button>
             </div>
@@ -116,4 +128,5 @@ export default function ImageUpload() {
       </div>
     </div>
   );
-}
+  
+}  

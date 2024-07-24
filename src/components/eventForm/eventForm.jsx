@@ -87,65 +87,69 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Event Title:</label>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div className="mb-4">
+        <label htmlFor="title" className="block text-sm font-bold mb-2">Event Title:</label>
         <input
           type="text"
           id="title"
           name="title"
           value={formData.title}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="address">Address:</label>
+      <div className="mb-4">
+        <label htmlFor="address" className="block text-sm font-bold mb-2">Address:</label>
         <input
           type="text"
           id="address"
           name="address"
           value={formData.address}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="date">Date:</label>
+      <div className="mb-4">
+        <label htmlFor="date" className="block text-sm font-bold mb-2">Date:</label>
         <input
           type="date"
           id="date"
           name="date"
           value={formData.date}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="startTime">Start Time:</label>
+      <div className="mb-4">
+        <label htmlFor="startTime" className="block text-sm font-bold mb-2">Start Time:</label>
         <input
           type="time"
           id="startTime"
           name="startTime"
           value={formData.startTime}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <div>
-        <label htmlFor="endTime">End Time:</label>
+      <div className="mb-4">
+        <label htmlFor="endTime" className="block text-sm font-bold mb-2">End Time:</label>
         <input
           type="time"
           id="endTime"
           name="endTime"
           value={formData.endTime}
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      {errors.time && <p className="error">{errors.time}</p>}
-      <div>
-        <label htmlFor="cost">Cost:</label>
+      <div className="mb-4">
+        <label htmlFor="cost" className="block text-sm font-bold mb-2">Cost:</label>
         <input
           type="number"
           id="cost"
@@ -153,11 +157,14 @@ export default function EventForm({ holidayId, initialData = {}, onSubmit }) {
           value={formData.cost}
           step="0.01"
           onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
           min="0"
           required
         />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700">
+        Submit
+      </button>
     </form>
   );
 }

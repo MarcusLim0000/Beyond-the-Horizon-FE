@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createHoliday } from "../../utilities/users-api";
-import "./createHoliday.css";
 
 export default function CreateHoliday() {
   const [formData, setFormData] = useState({
@@ -12,6 +11,8 @@ export default function CreateHoliday() {
   });
 
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -55,6 +56,7 @@ export default function CreateHoliday() {
         endDate: "",
       });
       setErrors({});
+      navigate("/profile")
     } catch (error) {
       console.error("Error creating holiday:", error);
       alert("Failed to create holiday.");
@@ -63,13 +65,15 @@ export default function CreateHoliday() {
 
   return (
     <>
-      <Link to="/profile">
-        <button className="profile-button">Go back to profile page</button>
-      </Link>
-      <div className="form-card">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
+      <div className="flex justify-center">
+        <Link to="/profile">
+          <button className="py-2 px-4 bg-black text-white font-bold rounded-full hover:bg-red-600 mt-5 mb-10">Go back to your profile</button>
+        </Link>
+      </div>
+      <div className="bg-gray-100 my-10 p-10 rounded-lg shadow-lg max-w-md mx-auto flex flex-col items-center">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="name" className="font-bold">Name:</label>
             <input
               type="text"
               id="name"
@@ -77,10 +81,11 @@ export default function CreateHoliday() {
               value={formData.name}
               onChange={handleChange}
               required
+              className="p-2 border border-gray-300 rounded-md"
             />
           </div>
-          <div>
-            <label htmlFor="country">Country:</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="country" className="font-bold">Country:</label>
             <input
               type="text"
               id="country"
@@ -88,10 +93,11 @@ export default function CreateHoliday() {
               value={formData.country}
               onChange={handleChange}
               required
+              className="p-2 border border-gray-300 rounded-md"
             />
           </div>
-          <div>
-            <label htmlFor="startDate">Start Date:</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="startDate" className="font-bold">Start Date:</label>
             <input
               type="date"
               id="startDate"
@@ -99,10 +105,11 @@ export default function CreateHoliday() {
               value={formData.startDate}
               onChange={handleChange}
               required
+              className="p-2 border border-gray-300 rounded-md"
             />
           </div>
-          <div>
-            <label htmlFor="endDate">End Date:</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="endDate" className="font-bold">End Date:</label>
             <input
               type="date"
               id="endDate"
@@ -110,10 +117,11 @@ export default function CreateHoliday() {
               value={formData.endDate}
               onChange={handleChange}
               required
+              className="p-2 border border-gray-300 rounded-md"
             />
           </div>
-          {errors.date && <p className="error">{errors.date}</p>}
-          <button type="submit">Submit</button>
+          {errors.date && <p className="text-red-500">{errors.date}</p>}
+          <button type="submit" className="py-2 bg-blue-600 text-white font-bold rounded-full hover:bg-red-600">Submit</button>
         </form>
       </div>
     </>

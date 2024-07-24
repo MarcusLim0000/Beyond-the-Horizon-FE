@@ -1,7 +1,6 @@
 import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getUser, logOut } from "./utilities/user-services";
-import "./App.css";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import Home from "./components/Home/Home";
@@ -10,8 +9,10 @@ import CreateHoliday from "./components/createHoliday/createHoliday";
 import ShowForms from "./components/showForms/showForms";
 import CurrencyConverter from "./components/currencyCon/currencyCon";
 import ImageUpload from "./components/imageUpload/imageUpload";
+import logo from "./assets/logo.jpg";
+import background from "./assets/background.jpg";
 
-function App() {
+export default function App() {
   const [user, setUser] = useState(getUser());
   const navigate = useNavigate();
 
@@ -22,42 +23,66 @@ function App() {
   }
 
   return (
-    <div>
-      <header>
-        <div className="logo-container">
+    <div className="flex flex-col md:flex-row">
+      <nav className="w-full md:w-64 min-h-screen bg-gray-800 text-white flex flex-col">
+        <div className="logo-container p-4 flex-shrink-0">
           {!user ? (
             <Link to="/">
-              <div className="logo"></div>
+              <img
+                src={logo}
+                alt="Logo"
+                className="logo h-100 w-100 mx-auto md:mx-0"
+              />
             </Link>
           ) : (
-            <div className="logo"></div>
+            <img
+              src={logo}
+              alt="Logo"
+              className="logo h-100 w-100 mx-auto md:mx-0"
+            />
           )}
         </div>
-        <nav>
-          {!user ? (
-            <>
-              <Link to="/signIn">
-                <button className="signIn_button">Sign In</button>
-              </Link>
-              <Link to="/signUp">
-                <button className="signUp_button">Sign Up</button>
-              </Link>
-            </>
-          ) : (
-            <>
+        <div className="flex flex-col flex-1 justify-between mt-4 md:mt-0">
+          <div className="flex flex-col items-center">
+            {!user ? (
+              <>
+                <Link to="/signIn">
+                  <button className="signIn_button bg-blue-500 text-white py-2 px-4 m-2 rounded">
+                    Sign In
+                  </button>
+                </Link>
+                <Link to="/signUp">
+                  <button className="signUp_button bg-green-500 text-white py-2 px-4 m-2 rounded">
+                    Sign Up
+                  </button>
+                </Link>
+              </>
+            ) : (
               <Link to="/currency-converter">
-                <button className="currency_button">
+                <button className="currency_button bg-yellow-500 text-white py-2 px-4 m-2 rounded">
                   Convert your currency here!
                 </button>
               </Link>
-              <button onClick={handleSignOut} className="signOut_button">
-                Sign Out
-              </button>
-            </>
+            )}
+          </div>
+          {user && (
+            <button
+              onClick={handleSignOut}
+              className="signOut_button bg-red-500 text-white py-2 px-4 m-2 rounded mt-auto"
+            >
+              Sign Out
+            </button>
           )}
-        </nav>
-      </header>
-      <main>
+        </div>
+      </nav>
+      <main
+        className="flex-1 p-4"
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route
@@ -88,5 +113,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

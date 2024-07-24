@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { signUp } from "../../utilities/users-api";
 
-function SignUp() {
+export default function SignUp() {
   const [state, setState] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   function handleChange(evt) {
     setState({ ...state, [evt.target.name]: evt.target.value });
@@ -39,6 +42,7 @@ function SignUp() {
     try {
       await signUp(userData);
       alert("Sign up is successful! Please sign in now!");
+      navigate("/signIn");
     } catch (error) {
       console.log(error);
       alert("An error occurred. Please try again!");
@@ -47,45 +51,49 @@ function SignUp() {
 
   return (
     <>
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <label>Name</label>
+      <div className="flex justify-center items-center flex-col w-full max-w-md mx-auto p-5 shadow-lg rounded-lg box-border bg-white">
+        <form onSubmit={handleSubmit} className="flex flex-col w-full">
+          <label className="mt-2 mb-1 font-bold">Name</label>
           <input
             name="name"
             placeholder="Name"
             type="text"
             value={state.name}
             onChange={handleChange}
+            className="w-full p-2 mb-4 border border-gray-300 rounded-md box-border"
           />
-          <label>Email</label>
+          <label className="mt-2 mb-1 font-bold">Email</label>
           <input
             name="email"
             placeholder="Email"
             type="email"
             value={state.email}
             onChange={handleChange}
+            className="w-full p-2 mb-4 border border-gray-300 rounded-md box-border"
           />
-          <label>Password</label>
+          <label className="mt-2 mb-1 font-bold">Password</label>
           <input
             name="password"
             placeholder="Password"
             type="password"
             value={state.password}
             onChange={handleChange}
+            className="w-full p-2 mb-4 border border-gray-300 rounded-md box-border"
           />
-          <label>Confirm password</label>
+          <label className="mt-2 mb-1 font-bold">Confirm password</label>
           <input
             name="confirmPassword"
             placeholder="Retype Password"
             type="password"
             value={state.confirmPassword}
             onChange={handleChange}
+            className="w-full p-2 mb-4 border border-gray-300 rounded-md box-border"
           />
-          <button type="submit">Sign Up!</button>
+          <button type="submit" className="py-3 bg-blue-400 hover:bg-blue-600 text-white rounded-md text-lg cursor-pointer">
+            Sign up!
+          </button>
         </form>
       </div>
     </>
   );
 }
-
-export default SignUp;
