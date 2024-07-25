@@ -24,8 +24,8 @@ export default function App() {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <nav className="w-full md:w-64 min-h-screen bg-gray-800 text-white flex flex-col">
-        <div className="logo-container p-4 flex-shrink-0">
+      <nav className="w-full md:w-64 min-h-screen bg-gray-800 text-white flex flex-col md:flex-col">
+        <div className="logo-container p-4 flex-shrink-0 hidden md:block">
           {!user ? (
             <Link to="/">
               <img
@@ -42,8 +42,8 @@ export default function App() {
             />
           )}
         </div>
-        <div className="flex flex-col flex-1 justify-between mt-4 md:mt-0">
-          <div className="flex flex-col items-center">
+        <div className="flex flex-row md:flex-col flex-1 justify-between mt-4 md:mt-0">
+          <div className="flex flex-row md:flex-col items-center justify-center">
             {!user ? (
               <>
                 <Link to="/signIn">
@@ -112,4 +112,4 @@ export default function App() {
       </main>
     </div>
   );
-}
+}  
