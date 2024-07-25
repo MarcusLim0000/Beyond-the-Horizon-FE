@@ -24,21 +24,21 @@ export default function App() {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <nav className="w-full h-50 md:w-64 md:h-screen bg-gray-800 text-white flex flex-col md:flex-col">
-        <div className="logo-container p-4 flex-shrink-0 hidden md:block">
+      <nav className="w-full h-10 md:w-64 md:h-screen bg-gray-800 text-white flex flex-col md:flex-col">
+        <div className="logo-container p-1 md:p-4 flex-shrink-0">
           {!user ? (
             <Link to="/">
               <img
                 src={logo}
                 alt="Logo"
-                className="logo h-100 w-100 mx-auto md:mx-0"
+                className="logo w-9 h-9 md:w-100 md:h-100 mx-auto md:mx-0"
               />
             </Link>
           ) : (
             <img
               src={logo}
               alt="Logo"
-              className="logo h-100 w-100 mx-auto md:mx-0"
+              className="logo w-9 h-9 md:w-100 md:h-100 mx-auto md:mx-0"
             />
           )}
         </div>
@@ -111,6 +111,5 @@ export default function App() {
         </Routes>
       </main>
     </div>
-  );
-  
+  );  
 }  
