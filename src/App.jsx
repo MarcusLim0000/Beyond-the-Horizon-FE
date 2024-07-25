@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <nav className="w-full h-20 md:w-64 md:h-screen bg-gray-800 text-white flex flex-col md:flex-col">
+      <nav className="w-full h-15 md:w-64 md:h-screen bg-gray-800 text-white flex flex-col md:flex-col">
         <div className="logo-container p-4 flex-shrink-0 hidden md:block">
           {!user ? (
             <Link to="/">
