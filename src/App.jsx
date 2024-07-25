@@ -25,20 +25,20 @@ export default function App() {
   return (
     <div className="flex flex-col md:flex-row">
       <nav className="w-full h-40 md:w-64 md:h-screen bg-gray-800 text-white flex flex-col md:flex-col">
-        <div className="logo-container p-4 flex-shrink-0 md:block flex items-center justify-center">
+        <div className="logo-container p-4 flex-shrink-0 hidden md:block">
           {!user ? (
             <Link to="/">
               <img
                 src={logo}
                 alt="Logo"
-                className="w-9 h-9 md:w-24 md:h-24 mx-auto md:mx-0"
+                className="logo h-100 w-100 mx-auto md:mx-0"
               />
             </Link>
           ) : (
             <img
               src={logo}
               alt="Logo"
-              className="w-9 h-9 md:w-24 md:h-24 mx-auto md:mx-0"
+              className="logo h-100 w-100 mx-auto md:mx-0"
             />
           )}
         </div>
